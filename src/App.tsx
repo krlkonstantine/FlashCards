@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import {Counter} from './features/counter/Counter';
-import { Routes, Route, Navigate } from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import './App.css';
 import {Login} from "features/components/Login/Login";
 import {Profile} from "features/components/Profile/Profile";
@@ -11,20 +11,11 @@ import {Register} from "features/components/Register/Register";
 import {Packs} from "features/components/Packs/Packs";
 import {Cards} from "features/components/Cards/Cards";
 import {Learn} from "features/components/Learn/Learn";
+import {Error} from "features/components/Error/Error";
 import {SetNewPass} from "features/components/SetNewPass/SetNewPass";
+import {Pages} from "features/components/Pages/Pages";
 
-export const PATH = {
-    REGISTER: '/register',
-    LOGIN: '/log-in',
-    CHECK_EMAIL: '/check-email',
-    ERROR: '/404',
-    SET_NEW_PASS: '/set-new-password',
-    FORGOT_PASS: '/forgot-my-password',
-    PROFILE: '/profile',
-    PACKS: '/packs',
-    CARDS: '/cards',
-    LEARN: '/learn',
-}
+
 
 function App() {
     return (
@@ -74,25 +65,7 @@ function App() {
           </a>
         </span>
             </header>
-            <Routes>
-
-                {/*в начале мы попадаем на страницу '/' и переходим сразу на страницу /pre-junior*/}
-                <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
-                <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
-
-                <Route path={PATH.LOGIN} element={<Login/>}/>
-                <Route path={PATH.PROFILE} element={<Profile/>}/>
-                <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
-                <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
-                <Route path={PATH.REGISTER} element={<Register/>}/>
-                <Route path={PATH.PACKS} element={<Packs/>}/>
-                <Route path={PATH.CARDS} element={<Cards/>}/>
-                <Route path={PATH.LEARN} element={<Learn/>}/>
-                <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
-
-                {/*роут для несуществующей страницы должен отрисовать <Error404 />*/}
-                <Route path={'/404'} element={<Error/>}/>
-            </Routes>
+            <Pages/>
         </div>
     );
 }
