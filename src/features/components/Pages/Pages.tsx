@@ -5,8 +5,8 @@ import {Profile} from "features/components/Profile/Profile";
 import {ForgotPass} from "features/components/ForgotPass/ForgotPass";
 import {CheckEmail} from "features/components/CheckEmail/CheckEmail";
 import {Register} from "features/components/Register/Register";
-import {Packs} from "features/components/Packs/Packs";
-import {Cards} from "features/components/Cards/Cards";
+import {Packs} from "features/Packs/Packs";
+import {Cards} from "features/Cards/Cards";
 import {Learn} from "features/components/Learn/Learn";
 import {SetNewPass} from "features/components/SetNewPass/SetNewPass";
 import {Error} from "features/components/Error/Error";
@@ -49,11 +49,20 @@ export const Pages = () => {
                     <Route path={'/404'} element={<Error/>}/>
                 </Routes>
                 <NavLink className={s.navlinks}
-                    to={PATH.PROFILE}
+                         to={PATH.PROFILE}
                 >Profile</NavLink>
                 <NavLink className={s.navlinks}
-                    to={PATH.CARDS}
+                         to={PATH.CARDS}
                 >Cards</NavLink>
+                <NavLink className={s.navlinks}
+                         to={PATH.PACKS}
+                >Packs</NavLink>
+                <NavLink className={s.navlinks}
+                         to={PATH.LOGIN}
+                >Log in</NavLink>
+                <NavLink className={s.navlinks}
+                         to={PATH.REGISTER}
+                >Register</NavLink>
             </div>
         </BrowserRouter>
 
