@@ -1,5 +1,5 @@
-.container{
-    color: darkgreen;
-    text-decoration: none;
-    margin: 0 5px;
+.container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
