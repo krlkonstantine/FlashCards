@@ -13,18 +13,17 @@ export const authApi = {
 }
 
 //types
-export type ArgRegisterType = {
+export type ArgLoginType  = {
     email: string,
-    password: string
-}
-export type ArgLoginType = ArgRegisterType & {
+    password: string,
 	rememberMe: boolean
 }
+export type ArgRegisterType = Omit<ArgLoginType, 'rememberMe'>
 
 export type RegisterResponseType = {
-	addedUser: UserType;
+	addedUser: ProfileType;
 }
- type UserType = {
+ export type ProfileType = {
 	_id: string;
 	email: string;
 	rememberMe: boolean;
@@ -37,7 +36,7 @@ export type RegisterResponseType = {
 	__v: number;
 }
 
-export type LoginResponseType = UserType & {
+export type LoginResponseType = ProfileType & {
 	token: string;
 	tokenDeathTime: number;
 }
