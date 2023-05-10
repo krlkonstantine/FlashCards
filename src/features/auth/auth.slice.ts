@@ -12,9 +12,10 @@ const register = createAsyncThunk('auth/register', (arg: any) => {
 const login = createAsyncThunk('auth/login', (arg: ArgLoginType, thunkApi) => {
     const {dispatch} = thunkApi
     //создали санку, теперь подключаем ранее соданную апишку
-    authApi.login(arg).then((res) => {
+    return authApi.login(arg).then((res) => {
         debugger
-        dispatch(authActions.setProfile({profile: res.data}))
+        //dispatch(authActions.setProfile({profile: res.data}))
+        return {profile: res.data}
     })
 })
 
@@ -24,15 +25,17 @@ const slice = createSlice({
         profile: null as ProfileType | null
     },
     reducers: {
-        setProfile: (state, action: PayloadAction<{ profile: ProfileType }>) => {
-            state.profile = action.payload.profile
-        }
+        // setProfile: (state, action: PayloadAction<{ profile: ProfileType }>) => {
+        //     state.profile = action.payload.profile
+        // }
     },
-    extraReducers:builder => {
-
+    extraReducers: builder => {
+        builder.addCase(login.fulfilled, (state, action) => {
+            state.profile = action.payload.profile
+        })
     }
 })
 
 export const authReducer = slice.reducer
-export const authActions = slice.actions
+// export const authActions = slice.actions
 export const authThunks = {register, login}
