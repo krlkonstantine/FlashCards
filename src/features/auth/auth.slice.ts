@@ -1,23 +1,25 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ArgLoginType, authApi, ProfileType} from "features/auth/auth.api";
+import {AppDispatch, RootState} from "app/store";
 
-const register = createAsyncThunk('auth/register', (arg: any) => {
+const register = createAsyncThunk('auth/register', async (arg: any) => {
 
     //создали санку, теперь подключаем ранее соданную апишку
-    authApi.register(arg).then((res) => {
-        console.log('register:' + res.data.addedUser)
+    const res = await authApi.register(arg)
+})
 
-    })
-})
-const _login = createAsyncThunk('auth/login', (arg: ArgLoginType, thunkApi) => {
-    //создали санку, теперь подключаем ранее соданную апишку
-    return authApi.login(arg).then((res) => {
-        debugger
-        //dispatch(authActions.setProfile({profile: res.data}))
-        return {profile: res.data}
-    })
-})
-const login = createAsyncThunk('auth/login', async (arg: ArgLoginType, thunkApi) => {
+const login = createAsyncThunk<{profile:ProfileType}, ArgLoginType, {
+    //берем стейт из нашего стора
+    state:RootState,
+    //диспатч взяли тоже из стора
+    dispatch: AppDispatch,
+    rejectValue?:unknown
+}>('auth/login',
+    async (arg, thunkAPI) => {
+    const {getState} = thunkAPI
+        const state = getState()
+
+
     const res = await authApi.login(arg)
     return {profile: res.data}
 })
@@ -29,9 +31,13 @@ const slice = createSlice({
     },
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(login.fulfilled, (state, action) => {
+        builder
+            .addCase(login.fulfilled, (state, action) => {
             state.profile = action.payload.profile
         })
+            .addCase(register.rejected, (state,action)=>{
+
+            })
     }
 })
 
