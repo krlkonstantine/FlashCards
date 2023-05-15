@@ -96,9 +96,28 @@ input[type="submit"] {
     max-width: 600px;
     margin: 0 auto;
 }
+.signUpRedirect{
+    text-align: center;
+    color: #366EFF;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.active{
+    text-decoration: none;
+    color: #366EFF !important;
+}
 
 .forgotPassText{
     text-align: right;
     margin-bottom: 15px;
     margin-top: 0;
+}
+.donthaveAcc{
+    margin: 25px 0 10px;
+    color: black;
+    opacity: 0.5;
+    text-align: center;
 }

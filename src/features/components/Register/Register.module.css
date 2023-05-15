@@ -3,8 +3,28 @@
     align-items: center;
     gap: 10px;
 }*/
-label{
+.sendNewProfileButton {
+    border-radius: 20px;
+}
+
+.alreadyHaveAcc {
+    margin: 25px 0 10px;
+    color: black;
+    opacity: 0.5;
+    text-align: center;
+}
+
+label {
     margin-bottom: 5px;
+}
+
+.forgotPassText {
+    text-align: center;
+    color: #366EFF;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 15px;
+    margin-top: 0;
 }
 
 body {

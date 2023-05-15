@@ -32,7 +32,7 @@ export const Login = () => {
 
     return (
         <div className={s.container}>
-            <h1>Log in</h1>
+            <h1>Sign in</h1>
             <form style={{width:420}} className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
                 <label>
                     <label style={{margin: 0, color:'black',opacity: 0.5}}>Login:</label>
@@ -77,7 +77,6 @@ export const Login = () => {
                     control={<Checkbox defaultChecked />} label="Remember me" />
                 <div className={s.forgotPassText}>
                     <NavLink
-                    id={'hw5-pre-junior-link'}
                     to={PATH.FORGOT_PASS}
                     className={({isActive}) => isActive ? s.active : ""}
                 >
@@ -89,8 +88,16 @@ export const Login = () => {
                     title="Register" type="submit"
                     variant="contained"
                     endIcon={<SendIcon />}>
-                    Log in
+                    Sign in
                 </Button>
+                <div className={s.donthaveAcc}>Don't have an account?</div>
+                <div className={s.signUpRedirect}>
+                    <NavLink
+                        to={PATH.REGISTER}
+                        className={({isActive}) => isActive ? s.active : ""}
+                    >
+                        Sign Up
+                    </NavLink></div>
             </form>
         </div>
     );
