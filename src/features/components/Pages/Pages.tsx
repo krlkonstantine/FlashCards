@@ -12,6 +12,7 @@ import {SetNewPass} from "features/components/SetNewPass/SetNewPass";
 import {Error} from "features/components/Error/Error";
 import {NavLink} from 'react-router-dom'
 import s from "./Pages.module.css"
+import {Counter} from "features/counter/Counter";
 
 export const PATH = {
     REGISTER: '/register',
@@ -24,6 +25,7 @@ export const PATH = {
     PACKS: '/packs',
     CARDS: '/cards',
     LEARN: '/learn',
+    COUNTER: '/counter',
 }
 
 export const Pages = () => {
@@ -42,6 +44,7 @@ export const Pages = () => {
                     <Route path={PATH.PACKS} element={<Packs/>}/>
                     <Route path={PATH.CARDS} element={<Cards/>}/>
                     <Route path={PATH.LEARN} element={<Learn/>}/>
+                    <Route path={PATH.COUNTER} element={<Counter/>}/>
                     <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
                     <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
 

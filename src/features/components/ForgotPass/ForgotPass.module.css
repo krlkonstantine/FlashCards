@@ -1,12 +1,10 @@
 /*body {
-    width: 80%;
+    height: 100%;
     margin: 0 auto;
-    display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    justify-content: center;
+
 }*/
 
 .container {
@@ -34,39 +32,53 @@
     margin-top: 15vh;
     background: white;
     width: 480px;
-    height: 500px;
+    height: 480px;
 
 }
+
 .formTitle {
     font-weight: 600;
     color: black;
     font-size: 26px;
     line-height: 32px;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
-.sendNewProfileButton {
-    border-radius: 20px;
-    margin-top: 20px;
+.signUpRedirect {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 15px;
+    margin-top: 0;
+    text-align: center;
+
 }
 
-.alreadyHaveAcc {
+.active {
+    text-decoration: none;
+    color: #366EFF !important;
+}
+
+.forgotPassText {
+    text-align: right;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.donthaveAcc {
     margin: 25px 0 10px;
     color: black;
     opacity: 0.5;
     text-align: center;
 }
-
-.forgotPassText {
-    text-align: center;
-    color: #366EFF;
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 15px;
-    margin-top: 0;
+.secondaryTxt {
+    padding-top: 15px;
+    color: black;
+    opacity: 0.5;
+    text-align: left;
 }
-.active {
-    text-decoration: none;
-    color: #366EFF !important;
+
+.signInBtn {
+    border-radius: 20px;
+    margin-top: 45px;
 }

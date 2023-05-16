@@ -32,10 +32,11 @@ export const Login = () => {
 
     return (
         <div className={s.container}>
-            <h1>Sign in</h1>
-            <form style={{width:420}} className={s.formContainer} onSubmit={handleSubmit(onSubmit)}>
+            <div className={s.formContainer}>
+            <span className={s.formTitle}>Sign in</span>
+            <form style={{width:420}}  onSubmit={handleSubmit(onSubmit)}>
                 <label>
-                    <label style={{margin: 0, color:'black',opacity: 0.5}}>Login:</label>
+                    <label style={{margin: 0, color:'black',opacity: 0.5}}>Email:</label>
                     <Controller
 
                         name="email"
@@ -60,29 +61,20 @@ export const Login = () => {
                             style={{width:420}} {...field} />}
                     />
 
-                    {/*<div style={{height: 40}}>
-                        {errors?.password && <p>*Error!</p>}
-                    </div>*/}
-                </label>
-                {/*<label>
-                    <span>Password</span>
-                    <input type="password"
-                           {...register('password')}
-                    />
-                </label>
 
-                <input disabled={!isValid} title="Register" type="submit"/>*/}
-                <FormControlLabel
+                </label>
+               <FormControlLabel
                     style={{color: "black",marginBottom: 0}}
                     control={<Checkbox defaultChecked />} label="Remember me" />
                 <div className={s.forgotPassText}>
                     <NavLink
                     to={PATH.FORGOT_PASS}
-                    className={({isActive}) => isActive ? s.active : ""}
+                    className={s.active}
                 >
                     Forgot Password?
                 </NavLink></div>
                 <Button
+                    className={s.signInBtn}
                     style={{width: 420,textAlign:"center"}}
                     disabled={!isValid}
                     title="Register" type="submit"
@@ -94,11 +86,12 @@ export const Login = () => {
                 <div className={s.signUpRedirect}>
                     <NavLink
                         to={PATH.REGISTER}
-                        className={({isActive}) => isActive ? s.active : ""}
+                        className={s.active}
                     >
                         Sign Up
                     </NavLink></div>
             </form>
+            </div>
         </div>
     );
 };

@@ -18,7 +18,6 @@ function App() {
     return (
         <div className="App">
             {isLoading && <h1>Loader...</h1>}
-            <Counter />
             <Pages/>
         </div>
     );
