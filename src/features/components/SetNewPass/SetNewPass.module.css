@@ -1,11 +1,4 @@
-/*body {
-    height: 100%;
-    margin: 0 auto;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-}*/
 
 .container {
     width: 80%;
@@ -39,7 +32,8 @@
     font-size: 26px;
     line-height: 32px;
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
+    margin-bottom: 20px;
 }
 .signUpRedirect {
     font-size: 16px;
@@ -49,6 +43,7 @@
     text-align: center;
 
 }
+
 .active {
     text-decoration: none;
     color: #366EFF !important;
@@ -59,7 +54,7 @@
     margin-top: 0;
 }
 .donthaveAcc {
-    margin: 25px 0 10px;
+    margin: 15px 0 5px;
     color: black;
     opacity: 0.5;
     text-align: center;
@@ -73,4 +68,7 @@
 .signInBtn {
     border-radius: 20px;
     margin-top: 45px;
+}
+.error {
+    color: red;
 }

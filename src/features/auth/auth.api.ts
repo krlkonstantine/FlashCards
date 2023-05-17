@@ -7,12 +7,31 @@ export const authApi = {
         return instance.post<RegisterResponseType>('auth/register', arg)
     },
 	login: (arg:ArgLoginType) => {
-		// TODO
 		return instance.post<any>('auth/login',arg)
+	},
+    forgotPass: (arg:ArgForgotPass) => {
+		// TODO
+		return instance.post<any>('auth/forgot',arg)
+	},
+    setNewPass: (arg:ArgSetNewPass) => {
+		// TODO
+		return instance.post<ArgSetNewPassResponseType>('auth/set-new-password',arg)
 	}
 }
 
 //types
+export type ArgSetNewPassResponseType  = {
+	info: string
+	error: string
+}
+export type ArgSetNewPass  = {
+	password: string
+	resetPasswordToken?: string
+}
+
+export type ArgForgotPass  = {
+    email: string
+}
 export type ArgLoginType  = {
     email: string,
     password: string,

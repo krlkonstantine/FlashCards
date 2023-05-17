@@ -89,7 +89,7 @@ export const Register = () => {
                     </label>
                     <Button
                         className={s.sendNewProfileButton}
-                        style={{width: 420, textAlign: "center"}}
+                        style={{width: 420, textAlign: "center",borderRadius:20}}
                         disabled={!isValid}
                         title="Register" type="submit"
                         variant="contained"

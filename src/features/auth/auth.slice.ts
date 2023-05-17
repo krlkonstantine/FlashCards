@@ -15,6 +15,15 @@ const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
         return {profile: res.data}
     })
 
+const forgotPass = CreateAppAsyncThunk<void, any>('auth/forgotPass',
+    async (arg, thunkAPI) => {
+        const res = await authApi.forgotPass(arg)
+    })
+const setNewPass = CreateAppAsyncThunk<void, any>('auth/createNewPass',
+    async (arg, thunkAPI) => {
+        const res = await authApi.setNewPass(arg)
+    })
+
 const slice = createSlice({
     name: "auth",
     initialState: {
@@ -34,4 +43,4 @@ const slice = createSlice({
 
 export const authReducer = slice.reducer
 //export const authActions = slice.actions
-export const authThunks = {register, login}
+export const authThunks = {register, login, forgotPass, setNewPass}

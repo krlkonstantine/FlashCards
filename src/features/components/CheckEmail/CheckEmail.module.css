@@ -18,6 +18,8 @@
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+
+
 .formContainer {
     border: 1px solid dimgrey;
     border-radius: 15px;
@@ -33,6 +35,7 @@
     height: 480px;
 
 }
+
 .formTitle {
     font-weight: 600;
     color: black;
@@ -41,6 +44,7 @@
     text-align: center;
     padding-bottom: 20px;
 }
+
 .signUpRedirect {
     font-size: 16px;
     line-height: 24px;
@@ -49,28 +53,34 @@
     text-align: center;
 
 }
+
 .active {
     text-decoration: none;
     color: #366EFF !important;
 }
+
 .forgotPassText {
     text-align: right;
     margin-bottom: 15px;
     margin-top: 0;
 }
-.donthaveAcc {
+
+.emailInfo {
     margin: 25px 0 10px;
     color: black;
     opacity: 0.5;
     text-align: center;
 }
-.secondaryTxt {
-    padding-top: 15px;
-    color: black;
-    opacity: 0.5;
-    text-align: left;
-}
-.signInBtn {
+
+
+.redirectBtn {
     border-radius: 20px;
     margin-top: 45px;
+}
+
+
+.emailImg {
+    margin-top: 10px;
+    width: 100px;
+    height: auto;
 }

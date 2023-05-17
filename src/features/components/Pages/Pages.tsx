@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "features/components/Login/Login";
 import {Profile} from "features/components/Profile/Profile";
 import {ForgotPass} from "features/components/ForgotPass/ForgotPass";
@@ -19,7 +19,7 @@ export const PATH = {
     LOGIN: '/log-in',
     CHECK_EMAIL: '/check-email',
     ERROR: '/404',
-    SET_NEW_PASS: '/set-new-password',
+    SET_NEW_PASS: '/set-new-password/:resetPasswordToken',
     FORGOT_PASS: '/forgot-my-password',
     PROFILE: '/profile',
     PACKS: '/packs',
@@ -30,7 +30,7 @@ export const PATH = {
 
 export const Pages = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div>
                 <Routes>
                     {/*<Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
@@ -67,7 +67,7 @@ export const Pages = () => {
                          to={PATH.REGISTER}
                 >Register</NavLink>
             </div>
-        </BrowserRouter>
+        </HashRouter>
 
     );
 };
