@@ -5,11 +5,19 @@ import {Controller, useForm} from "react-hook-form";
 import s from "features/components/Login/Login.module.css";
 import {Button, Checkbox, FormControlLabel, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
+import {emailToBeShown} from "features/components/ForgotPass/ForgotPass";
+
+export let displayedEmail:string
 
 export const Login = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(PATH.LOGIN);
+    }
 
     const loginHandler = () => {
         const payload = {
@@ -27,7 +35,9 @@ export const Login = () => {
     const onSubmit = (data: any) => {
         alert(JSON.stringify(data))
         dispatch(authThunks.login(data))
+        displayedEmail = data.email
         reset()
+        navigate(PATH.PROFILE)
     }
 
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Navigate, Route, Routes} from "react-router-dom";
+import {HashRouter, Navigate, Route, Routes, useParams} from "react-router-dom";
 import {Login} from "features/components/Login/Login";
 import {Profile} from "features/components/Profile/Profile";
 import {ForgotPass} from "features/components/ForgotPass/ForgotPass";
@@ -29,6 +29,8 @@ export const PATH = {
 }
 
 export const Pages = () => {
+    const { token } = useParams<{ token: string }>()
+
     return (
         <HashRouter>
             <div>
@@ -46,6 +48,7 @@ export const Pages = () => {
                     <Route path={PATH.LEARN} element={<Learn/>}/>
                     <Route path={PATH.COUNTER} element={<Counter/>}/>
                     <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
+                    {/*<Route path={"/set-new-password/:resetPasswordToken"} element={<SetNewPass/>}/>*/}
                     <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
 
                     {/*роут для несуществующей страницы должен отрисовать <Error404 />*/}

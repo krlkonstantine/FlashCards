@@ -3,7 +3,7 @@ import s from "features/components/ForgotPass/ForgotPass.module.css";
 import {Controller, useForm} from "react-hook-form";
 import {Button, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {useAppDispatch} from "app/hooks";
 import {authThunks} from "features/auth/auth.slice";
@@ -22,7 +22,10 @@ export const SetNewPass = () => {
     })
 
 
+    const {token} = useParams<{ token: string }>()
+
     const onSubmit = (data: any) => {
+        console.log(token)
         //TODO
         alert(JSON.stringify(data))
         if (data.password === data.confirmedPass) {
@@ -30,10 +33,13 @@ export const SetNewPass = () => {
             alert("done")
             reset()
             handleRedirect()
-        } else alert("passwords don't match")
+            alert("passwords don't match")
+        } else {
+        }
     }
 
     return (
+
         <div className={s.container}>
             <div className={s.formContainer}>
                 <span className={s.formTitle}>Create a new password</span>

@@ -1,8 +1,10 @@
 import { instance } from "common/api/common.api";
+import {useParams} from "react-router-dom";
 
 
 
 export const authApi = {
+
     register: (arg:ArgRegisterType) => {
         return instance.post<RegisterResponseType>('auth/register', arg)
     },
