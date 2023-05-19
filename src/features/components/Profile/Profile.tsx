@@ -7,7 +7,7 @@ import profileImg from "../../../common/img/profile_pic.jpg"
 import {emailToBeShown} from "features/components/ForgotPass/ForgotPass";
 import {displayedEmail} from "features/components/Login/Login";
 import ProfileTitle from "features/components/Profile/ProfileTitle";
-import {EditableSpan} from "features/components/EditableSpan/EditableSpan";
+import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 
@@ -25,13 +25,13 @@ export const Profile = () => {
     return (
         <div className={s.container}>
             <div className={s.formContainer}>
-                <span className={s.mainTitle}>Personal Inforation</span>
+                <span className={s.mainTitle}>Personal Information</span>
                 <img className={s.profilePic} src={profileImg} alt="email_logo"/>
                 <div className={s.profileNameContainer}>
                     <EditableSpan value={"Konstantine"} onChange={() => {
                     }}/>
                 </div>
-                <div className={s.emailInfo}>{displayedEmail}</div>
+                <div className={s.emailInfo}>{displayedEmail ? displayedEmail : "krlkonstatine@gmail.com"}</div>
 
                 <Button onClick={handleLogOut}
                         className={s.redirectBtn}

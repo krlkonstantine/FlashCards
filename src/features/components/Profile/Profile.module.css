@@ -72,6 +72,11 @@
     width: 35%;
 }
 
+.profileNameContainer{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
 
 .profilePic {
     border-radius: 50%;

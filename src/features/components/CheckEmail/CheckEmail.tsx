@@ -14,20 +14,19 @@ export const CheckEmail = () => {
         navigate(PATH.LOGIN);
     }
 
-    return (
-        <div className={s.container}>
-            <div className={s.formContainer}>
-                <span className={s.formTitle}>Check your Email</span>
+        return (
+            <div className={s.mainContainer}>
+                <div className={s.pageContent}>
+                    <span className={s.mainTitle}>Check your Email</span>
                     <img className={s.emailImg} src={emailImg} alt="email_logo"/>
-                <div className={s.emailInfo}>We've sent an Email with instructions to {emailToBeShown}</div>
-                <Button
-                    onClick={handleClick}
-                    className={s.redirectBtn}
-                    style={{width: 420, textAlign: "center"}}
-                    variant="contained"
-                >Back to login</Button>
+                    <div className={s.emailInfo}>We've sent an Email with instructions to {emailToBeShown}</div>
+                    <Button
+                        onClick={handleClick}
+                        className={s.redirectBtn}
+                        variant="contained"
+                    >Back to login</Button>
+                </div>
             </div>
-        </div>
     );
     ;
 };

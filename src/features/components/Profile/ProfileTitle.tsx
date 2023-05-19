@@ -1,5 +1,5 @@
 import React from 'react';
-import {EditableSpan} from "features/components/EditableSpan/EditableSpan";
+import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 
  type ProfileTilPropsType = {
      title:string
