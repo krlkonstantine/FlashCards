@@ -5,7 +5,7 @@ import {Controller, useForm} from "react-hook-form";
 import s from "features/components/ForgotPass/ForgotPass.module.css";
 import {Button, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 
 export let emailToBeShown: string
@@ -13,6 +13,7 @@ export let emailToBeShown: string
 export const ForgotPass = () => {
         const dispatch = useAppDispatch();
         const navigate = useNavigate();
+        const {token} = useParams<{ token: string }>()
 
         const handleRedirect = () => {
             navigate(PATH.CHECK_EMAIL);
@@ -33,7 +34,7 @@ export const ForgotPass = () => {
             dispatch(authThunks.forgotPass(data))
             reset()
             passTheEmail(data)
-            handleRedirect()
+            //handleRedirect()
         }
 
         return (
@@ -60,7 +61,7 @@ export const ForgotPass = () => {
 
                         <Button
                             className={s.signInBtn}
-                            style={{width: 420, textAlign: "center",borderRadius:20}}
+                            style={{width: 420, textAlign: "center", borderRadius: 20}}
                             disabled={!isValid}
                             title="Register" type="submit"
                             variant="contained"

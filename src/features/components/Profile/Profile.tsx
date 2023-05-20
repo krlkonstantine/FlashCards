@@ -4,22 +4,28 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {Button} from "@mui/material";
 import profileImg from "../../../common/img/profile_pic.jpg"
-import {emailToBeShown} from "features/components/ForgotPass/ForgotPass";
 import {displayedEmail} from "features/components/Login/Login";
-import ProfileTitle from "features/components/Profile/ProfileTitle";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
+import {useAppDispatch} from "app/hooks";
+import {authThunks} from "features/auth/auth.slice";
 
 
 export const Profile = () => {
-    const [editName, setEditName] = useState<boolean>(false)
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const onNameChangeHandler = (newValue: string) => {
+        const valueToBeSent = {
+            name: newValue
+        }
+        dispatch(authThunks.changeUserName(valueToBeSent));
         navigate(PATH.LOGIN);
     }
-    const handleLogOut = () => {
 
+    const handleLogOut = () => {
+        dispatch(authThunks.logOut({}));
+        navigate(PATH.LOGIN);
     }
 
     return (
@@ -28,14 +34,15 @@ export const Profile = () => {
                 <span className={s.mainTitle}>Personal Information</span>
                 <img className={s.profilePic} src={profileImg} alt="email_logo"/>
                 <div className={s.profileNameContainer}>
-                    <EditableSpan value={"Konstantine"} onChange={() => {
-                    }}/>
+                    <EditableSpan
+                        value={"Konstantine"}
+                        onChange={onNameChangeHandler}/>
                 </div>
                 <div className={s.emailInfo}>{displayedEmail ? displayedEmail : "krlkonstatine@gmail.com"}</div>
 
                 <Button onClick={handleLogOut}
                         className={s.redirectBtn}
-                    variant="outlined" startIcon={<LogoutIcon />}>
+                        variant="outlined" startIcon={<LogoutIcon/>}>
                     Log out
                 </Button>
             </div>

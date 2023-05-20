@@ -15,9 +15,7 @@ export const Login = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate(PATH.LOGIN);
-    }
+
 
     const loginHandler = () => {
         const payload = {

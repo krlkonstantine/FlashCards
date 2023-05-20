@@ -12,29 +12,30 @@ import {authThunks} from "features/auth/auth.slice";
 export const SetNewPass = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { resetPasswordToken } = useParams<{ resetPasswordToken: string }>()
 
     const handleRedirect = () => {
         navigate(PATH.LOGIN);
     }
 
+
     const {register, control, formState: {errors, isValid}, handleSubmit, reset} = useForm({
         mode: "onSubmit"
     })
 
-
-    const {token} = useParams<{ token: string }>()
-
     const onSubmit = (data: any) => {
-        console.log(token)
-        //TODO
-        alert(JSON.stringify(data))
+        const dataForNewPass = {
+            password: data.password,
+            resetPasswordToken
+        }
+        alert(JSON.stringify(dataForNewPass))
         if (data.password === data.confirmedPass) {
-            dispatch(authThunks.setNewPass(data,))
+            dispatch(authThunks.setNewPass(dataForNewPass))
             alert("done")
             reset()
-            handleRedirect()
-            alert("passwords don't match")
+            //handleRedirect()
         } else {
+            alert("passwords don't match")
         }
     }
 

@@ -29,7 +29,6 @@ export const PATH = {
 }
 
 export const Pages = () => {
-    const { token } = useParams<{ token: string }>()
 
     return (
         <HashRouter>

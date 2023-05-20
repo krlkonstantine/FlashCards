@@ -1,5 +1,4 @@
 import { instance } from "common/api/common.api";
-import {useParams} from "react-router-dom";
 
 
 
@@ -18,10 +17,28 @@ export const authApi = {
     setNewPass: (arg:ArgSetNewPass) => {
 		// TODO
 		return instance.post<ArgSetNewPassResponseType>('auth/set-new-password',arg)
+	},
+	logOut: () => {
+		// TODO
+		return instance.delete<any>('auth/me')
+	},
+	changeUserName: (arg:ArgChangeUserName) => {
+		// TODO
+		return instance.put<ArgChangeUserNameResponseType>('auth/me',arg)
 	}
 }
 
 //types
+
+export type ArgChangeUserNameResponseType  = {
+	updatedUser: ProfileType
+	error?: string
+}
+export type ArgChangeUserName  = {
+	name?: string,
+	avatar?: string
+}
+
 export type ArgSetNewPassResponseType  = {
 	info: string
 	error: string
