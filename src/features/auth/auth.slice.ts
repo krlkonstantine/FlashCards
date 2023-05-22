@@ -1,17 +1,55 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "features/auth/auth.api";
+import {ArgChangeUserName, ArgLoginType, ArgRegisterType, authApi, ProfileType} from "features/auth/auth.api";
 import {AppDispatch, RootState} from "app/store";
 import {CreateAppAsyncThunk} from "common/utils/CreateAsyncThunk";
+import {appActions} from "app/app.slice";
+
+const slice = createSlice({
+
+    name: "auth",
+    initialState: {
+        profile: null as ProfileType | null,
+    },
+    reducers: {},
+    extraReducers: builder => {
+        builder
+            .addCase(login.fulfilled, (state, action) => {
+                state.profile = action.payload.profile
+            })
+            .addCase(changeUserName.fulfilled, (state, action) => {
+                if (state.profile) {
+                    debugger
+                    state.profile.name = action.payload
+                }
+            })
+
+    }
+})
+
 
 const register = CreateAppAsyncThunk<void, ArgRegisterType>
-('auth/register', async (arg) => {
+('auth/register', async (arg, thunkAPI) => {
     //создали санку, теперь подключаем ранее соданную апишку
-    const res = await authApi.register(arg)
+    const {dispatch, rejectWithValue} = thunkAPI
+    try {
+        await authApi.register(arg)
+    } catch (e: any) {
+        debugger
+        dispatch(appActions.setError({error: e.response.data.error}))
+        return rejectWithValue(null)
+    }
+
 })
 
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',
     async (arg, thunkAPI) => {
         const res = await authApi.login(arg)
+        return {profile: res.data}
+    })
+
+const changeUserName = CreateAppAsyncThunk<any, ArgChangeUserName>('auth/changeUserName',
+    async (arg, thunkAPI) => {
+        const res = await authApi.changeUserName(arg)
         return {profile: res.data}
     })
 
@@ -25,33 +63,11 @@ const forgotPass = CreateAppAsyncThunk<void, any>('auth/forgotPass',
         const res = await authApi.forgotPass(arg)
     })
 
+
 const setNewPass = CreateAppAsyncThunk<void, any>('auth/createNewPass',
     async (arg, thunkAPI) => {
         const res = await authApi.setNewPass(arg)
     })
-
-const changeUserName = CreateAppAsyncThunk<void, any>('auth/changeUserName',
-    async (arg, thunkAPI) => {
-        const res = await authApi.changeUserName(arg)
-    })
-
-
-const slice = createSlice({
-    name: "auth",
-    initialState: {
-        profile: null as ProfileType | null
-    },
-    reducers: {},
-    extraReducers: builder => {
-        builder
-            .addCase(login.fulfilled, (state, action) => {
-                state.profile = action.payload.profile
-            })
-            .addCase(register.rejected, (state, action) => {
-
-            })
-    }
-})
 
 export const authReducer = slice.reducer
 //export const authActions = slice.actions
