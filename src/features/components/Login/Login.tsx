@@ -7,14 +7,12 @@ import {Button, Checkbox, FormControlLabel, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
-import {emailToBeShown} from "features/components/ForgotPass/ForgotPass";
 
-export let displayedEmail:string
+export let displayedEmail: string
+
 
 export const Login = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
 
 
     const loginHandler = () => {
@@ -30,12 +28,12 @@ export const Login = () => {
         mode: "onSubmit"
     })
 
+
     const onSubmit = (data: any) => {
         alert(JSON.stringify(data))
         dispatch(authThunks.login(data))
         displayedEmail = data.email
         reset()
-        navigate(PATH.PROFILE)
     }
 
     return (
@@ -81,7 +79,7 @@ export const Login = () => {
                         </NavLink></div>
                     <Button
                         className={s.signInBtn}
-                        style={{width: 420, textAlign: "center",borderRadius:20}}
+                        style={{width: 420, textAlign: "center", borderRadius: 20}}
                         disabled={!isValid}
                         title="Register" type="submit"
                         variant="contained"

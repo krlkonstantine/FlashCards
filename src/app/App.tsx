@@ -1,8 +1,9 @@
 import {Counter} from "features/counter/Counter";
 import {useAppDispatch, useAppSelector} from "app/hooks";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {appActions} from "app/app.slice";
 import {Pages} from "features/components/Pages/Pages";
+import {GlobalError} from "common/components/GlobalError/GlobalError";
 
 function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading);
@@ -19,6 +20,7 @@ function App() {
         <div className="App">
             {isLoading && <h1>Loader...</h1>}
             <Pages/>
+            <GlobalError/>
         </div>
     );
 }

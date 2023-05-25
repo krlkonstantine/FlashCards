@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import ReactDOM from "react-dom/client";
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import {GlobalError} from "common/components/GlobalError/GlobalError";
 
 /*const container = document.getElementById('root')!;
 const root = createRoot(container);*/

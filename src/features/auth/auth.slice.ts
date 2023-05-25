@@ -3,6 +3,8 @@ import {ArgChangeUserName, ArgLoginType, ArgRegisterType, authApi, ProfileType} 
 import {AppDispatch, RootState} from "app/store";
 import {CreateAppAsyncThunk} from "common/utils/CreateAsyncThunk";
 import {appActions} from "app/app.slice";
+import {thunkTryCatch} from "common/utils/thunk-try-catch";
+import {useAppDispatch} from "app/hooks";
 
 const slice = createSlice({
 
@@ -30,21 +32,23 @@ const slice = createSlice({
 const register = CreateAppAsyncThunk<void, ArgRegisterType>
 ('auth/register', async (arg, thunkAPI) => {
     //создали санку, теперь подключаем ранее соданную апишку
-    const {dispatch, rejectWithValue} = thunkAPI
-    try {
-        await authApi.register(arg)
-    } catch (e: any) {
-        debugger
-        dispatch(appActions.setError({error: e.response.data.error}))
-        return rejectWithValue(null)
-    }
+    //первым параметром передаем санк апи
+    //вторым передаем саму нашу логику норм сценария
+    return thunkTryCatch(thunkAPI,async ()=>{
+         await authApi.register(arg)
+     })
 
 })
 
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',
     async (arg, thunkAPI) => {
-        const res = await authApi.login(arg)
-        return {profile: res.data}
+    //как обрабатываем ошибки?
+
+    //деструкт.достаем нужные методы из санкАПИ
+       return thunkTryCatch(thunkAPI,async ()=>{
+            const res = await authApi.login(arg)
+            return {profile: res.data}
+        })
     })
 
 const changeUserName = CreateAppAsyncThunk<any, ArgChangeUserName>('auth/changeUserName',
