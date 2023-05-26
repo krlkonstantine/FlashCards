@@ -1,10 +1,9 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ArgChangeUserName, ArgLoginType, ArgRegisterType, authApi, ProfileType} from "features/auth/auth.api";
 import {AppDispatch, RootState} from "app/store";
-import {CreateAppAsyncThunk} from "common/utils/CreateAsyncThunk";
 import {appActions} from "app/app.slice";
-import {thunkTryCatch} from "common/utils/thunk-try-catch";
-import {useAppDispatch} from "app/hooks";
+import {thunkTryCatch} from "common/utils/thunkTryCatch";
+import {CreateAppAsyncThunk} from "common/utils";
 
 const slice = createSlice({
 
@@ -16,7 +15,9 @@ const slice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(login.fulfilled, (state, action) => {
-                state.profile = action.payload.profile
+                state.profile = action.payload.profile;
+
+
             })
             .addCase(changeUserName.fulfilled, (state, action) => {
                 if (state.profile) {
@@ -43,12 +44,13 @@ const register = CreateAppAsyncThunk<void, ArgRegisterType>
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',
     async (arg, thunkAPI) => {
     //как обрабатываем ошибки?
+        const {dispatch} = thunkAPI
 
     //деструкт.достаем нужные методы из санкАПИ
        return thunkTryCatch(thunkAPI,async ()=>{
             const res = await authApi.login(arg)
             return {profile: res.data}
-        })
+       })
     })
 
 const changeUserName = CreateAppAsyncThunk<any, ArgChangeUserName>('auth/changeUserName',

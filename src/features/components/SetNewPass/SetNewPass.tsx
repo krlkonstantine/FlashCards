@@ -5,8 +5,8 @@ import {Button, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
-import {useAppDispatch} from "app/hooks";
 import {authThunks} from "features/auth/auth.slice";
+import {useAppDispatch} from "common/hooks";
 
 
 export const SetNewPass = () => {

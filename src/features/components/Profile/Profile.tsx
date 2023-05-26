@@ -7,7 +7,7 @@ import profileImg from "../../../common/img/profile_pic.jpg"
 import {displayedEmail} from "features/components/Login/Login";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useAppDispatch} from "app/hooks";
+import {useAppDispatch} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
 
 

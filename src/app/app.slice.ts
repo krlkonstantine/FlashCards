@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AxiosError, isAxiosError} from "axios";
 
 const appInitState = {
     error: null as string | null,
@@ -16,11 +17,39 @@ const slice = createSlice({
             state.isLoading = action.payload.isLoading
         },
         setError: (state, action: PayloadAction<{ error: string | null }>) => {
-            debugger
             state.error = action.payload.error
         }
+    },
+    extraReducers: builder => {
+        builder
+            .addMatcher((action) => {
+                return action.type.endsWith("/pending")
+            },
+            (state, action) => {
+                state.isLoading = true
+            }).addMatcher((action) => action.type.endsWith("/fulfilled"),
+            (state, action) => {
+                state.isLoading = false
+            })
+            .addMatcher((action) => action.type.endsWith("/rejected"),
+                (state, action) => {
+                    const err = action.payload as Error | AxiosError<{ error: string }>;
+                    if (isAxiosError(err)) {
+                        state.error = err.response ? err.response.data.error : err.message;;
+                    } else {
+                        state.error = `Native error ${err.message}`;
+                    }
+                    state.isLoading = false;
+                })
     }
 })
+
+/*const setLoading = CreateAppAsyncThunk<void,any>('app/setLoading',async (arg,thunkAPI) =>{
+    return thunkTryCatch(thunkAPI,async ()=>{
+        const {dispatch} = thunkAPI
+        dispatch(appActions.setIsLoading({isLoading:false}))
+    })
+})*/
 
 export const appReducer = slice.reducer
 export const appActions = slice.actions

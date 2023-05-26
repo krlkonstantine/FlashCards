@@ -1,12 +1,13 @@
 import React from 'react';
-import {useAppDispatch} from "app/hooks";
 import {authThunks} from "features/auth/auth.slice";
 import {Controller, useForm} from "react-hook-form";
 import s from "features/components/Login/Login.module.css";
 import {Button, Checkbox, FormControlLabel, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
+import {useAppDispatch} from "common/hooks";
+import {useSelector} from "react-redux";
 
 export let displayedEmail: string
 
@@ -15,24 +16,15 @@ export const Login = () => {
     const dispatch = useAppDispatch();
 
 
-    const loginHandler = () => {
-        const payload = {
-            email: "kornitsel.dev@nya.nya",
-            password: "123qazxcvBG",
-            rememberMe: false
-        }
-        dispatch(authThunks.login(payload));
-    };
-
     const {register, control, formState: {errors, isValid}, handleSubmit, reset} = useForm({
         mode: "onSubmit"
     })
 
 
     const onSubmit = (data: any) => {
+        reset()
         alert(JSON.stringify(data))
         dispatch(authThunks.login(data))
-        displayedEmail = data.email
         reset()
     }
 

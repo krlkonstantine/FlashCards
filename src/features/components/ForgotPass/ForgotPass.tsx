@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAppDispatch} from "app/hooks";
+import {useAppDispatch} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
 import {Controller, useForm} from "react-hook-form";
 import s from "features/components/ForgotPass/ForgotPass.module.css";

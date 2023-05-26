@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {authThunks} from "features/auth/auth.slice";
-import {useAppDispatch} from "app/hooks";
+import {useAppDispatch} from "common/hooks";
 import s from "./Register.module.css"
 import {useForm, Controller} from "react-hook-form";
 import {Input, Button} from "@mui/material";
