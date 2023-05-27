@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosError, isAxiosError} from "axios";
+import {authThunks} from "features/auth/auth.slice";
 
 const appInitState = {
     error: null as string | null,
@@ -22,20 +23,27 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addMatcher((action) => {
-                return action.type.endsWith("/pending")
-            },
-            (state, action) => {
-                state.isLoading = true
-            }).addMatcher((action) => action.type.endsWith("/fulfilled"),
+            .addMatcher(
+                (action) => {
+                    return action.type.endsWith("/pending")
+                },
+                (state, action) => {
+                    state.isLoading = true
+                }).addMatcher((action) => action.type.endsWith("/fulfilled"),
             (state, action) => {
                 state.isLoading = false
             })
-            .addMatcher((action) => action.type.endsWith("/rejected"),
+            .addMatcher(
+                (action) => action.type.endsWith("/rejected"),
                 (state, action) => {
-                    const err = action.payload as Error | AxiosError<{ error: string }>;
+                    state.isLoading = false;
+
+                    if (!action.payload.showGlobalError) return;
+
+
+                    const err = action.payload.e as Error | AxiosError<{ error: string }>;
                     if (isAxiosError(err)) {
-                        state.error = err.response ? err.response.data.error : err.message;;
+                        state.error = err.response ? err.response.data.error : err.message;
                     } else {
                         state.error = `Native error ${err.message}`;
                     }

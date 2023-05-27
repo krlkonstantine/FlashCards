@@ -3,7 +3,7 @@ import s from "features/components/Profile/Profile.module.css";
 import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {Button} from "@mui/material";
-import profileImg from "../../../common/img/profile_pic.jpg"
+import profileImg from "../../../common/assets/img/profile_pic.jpg"
 import {displayedEmail} from "features/components/Login/Login";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';

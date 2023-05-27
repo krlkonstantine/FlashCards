@@ -4,17 +4,18 @@ import {Controller, useForm} from "react-hook-form";
 import s from "features/components/Login/Login.module.css";
 import {Button, Checkbox, FormControlLabel, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {useAppDispatch} from "common/hooks";
 import {useSelector} from "react-redux";
+import {toast} from "react-toastify";
 
 export let displayedEmail: string
 
 
 export const Login = () => {
     const dispatch = useAppDispatch();
-
+    const navigate = useNavigate()
 
     const {register, control, formState: {errors, isValid}, handleSubmit, reset} = useForm({
         mode: "onSubmit"
@@ -25,6 +26,13 @@ export const Login = () => {
         reset()
         alert(JSON.stringify(data))
         dispatch(authThunks.login(data))
+            .unwrap()
+            .then((res)=>{
+                toast.success("Login successfully")
+            })
+            .catch((err)=>{
+                toast.error(err.e.response.data.error)
+            })
         reset()
     }
 

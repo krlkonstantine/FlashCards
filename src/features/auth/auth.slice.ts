@@ -16,8 +16,6 @@ const slice = createSlice({
         builder
             .addCase(login.fulfilled, (state, action) => {
                 state.profile = action.payload.profile;
-
-
             })
             .addCase(changeUserName.fulfilled, (state, action) => {
                 if (state.profile) {
@@ -35,22 +33,23 @@ const register = CreateAppAsyncThunk<void, ArgRegisterType>
     //создали санку, теперь подключаем ранее соданную апишку
     //первым параметром передаем санк апи
     //вторым передаем саму нашу логику норм сценария
-    return thunkTryCatch(thunkAPI,async ()=>{
-         await authApi.register(arg)
-     })
+    return thunkTryCatch(thunkAPI, async () => {
+        await authApi.register(arg)
+    })
 
 })
 
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',
     async (arg, thunkAPI) => {
-    //как обрабатываем ошибки?
-        const {dispatch} = thunkAPI
-
-    //деструкт.достаем нужные методы из санкАПИ
-       return thunkTryCatch(thunkAPI,async ()=>{
-            const res = await authApi.login(arg)
-            return {profile: res.data}
-       })
+        //как обрабатываем ошибки?
+        //деструкт.достаем нужные методы из санкАПИ
+        return thunkTryCatch(thunkAPI, async () => {
+                const res = await authApi.login(arg)
+                const profileData = res.data
+                return {profile: res.data}
+            },
+            false
+        )
     })
 
 const changeUserName = CreateAppAsyncThunk<any, ArgChangeUserName>('auth/changeUserName',
