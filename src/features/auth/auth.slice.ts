@@ -10,16 +10,22 @@ const slice = createSlice({
     name: "auth",
     initialState: {
         profile: null as ProfileType | null,
+        isLoggedIn:false
     },
     reducers: {},
     extraReducers: builder => {
         builder
             .addCase(login.fulfilled, (state, action) => {
                 state.profile = action.payload.profile;
+                state.isLoggedIn = true;
+
+            })
+            .addCase(logOut.fulfilled, (state, action) => {
+                state.isLoggedIn = false;
+
             })
             .addCase(changeUserName.fulfilled, (state, action) => {
                 if (state.profile) {
-                    debugger
                     state.profile.name = action.payload
                 }
             })

@@ -4,6 +4,7 @@ import {Pages} from "features/components/Pages/Pages";
 import {GlobalError} from "common/components/GlobalError/GlobalError";
 import {LinearProgress} from "@mui/material";
 import {useAppSelector} from "common/hooks";
+import {Header} from "features/components/Header/Header";
 
 function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading);

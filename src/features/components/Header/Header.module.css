@@ -1,0 +1,30 @@
+.navBarProfileImg {
+    position: absolute;
+    margin-left: 80%;
+    top: 30%;
+    width: 32px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.navBarUserName{
+    font-size: 20px;
+    font-weight: 600;
+    color: red;
+}
+.header {
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+
+}
+
+.header h1 {
+    font-size: 25px;
+    margin: 10px 70px;
+    text-align: right;
+}

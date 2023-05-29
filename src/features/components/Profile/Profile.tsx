@@ -7,13 +7,15 @@ import profileImg from "../../../common/assets/img/profile_pic.jpg"
 import {displayedEmail} from "features/components/Login/Login";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {useAppDispatch} from "common/hooks";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
+import {useSelector} from "react-redux";
 
 
 export const Profile = () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     const onNameChangeHandler = (newValue: string) => {
         const valueToBeSent = {
@@ -30,15 +32,15 @@ export const Profile = () => {
 
     return (
         <div className={s.container}>
-            <div className={s.formContainer}>
+            <div className={s.profileContainer}>
                 <span className={s.mainTitle}>Personal Information</span>
                 <img className={s.profilePic} src={profileImg} alt="email_logo"/>
                 <div className={s.profileNameContainer}>
                     <EditableSpan
-                        value={"Konstantine"}
+                        value={"userName"}
                         onChange={onNameChangeHandler}/>
                 </div>
-                <div className={s.emailInfo}>{displayedEmail ? displayedEmail : "krlkonstatine@gmail.com"}</div>
+                <div className={s.emailInfo}>{"ds"}</div>
 
                 <Button onClick={handleLogOut}
                         className={s.redirectBtn}
@@ -48,6 +50,5 @@ export const Profile = () => {
             </div>
         </div>
     );
-    ;
 };
 

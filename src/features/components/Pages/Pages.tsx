@@ -13,6 +13,7 @@ import {Error} from "features/components/Error/Error";
 import {NavLink} from 'react-router-dom'
 import s from "./Pages.module.css"
 import {Counter} from "features/counter/Counter";
+import {Header} from "features/components/Header/Header";
 
 export const PATH = {
     REGISTER: '/register',
@@ -33,6 +34,7 @@ export const Pages = () => {
     return (
         <HashRouter>
             <div>
+                <Header/>
                 <Routes>
                     {/*<Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
