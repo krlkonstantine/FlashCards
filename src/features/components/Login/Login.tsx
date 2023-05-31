@@ -29,6 +29,7 @@ export const Login = () => {
             .unwrap()
             .then((res)=>{
                 toast.success("Login successfully")
+                navigate(PATH.PROFILE)
             })
             .catch((err)=>{
                 toast.error(err.e.response.data.error)

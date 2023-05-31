@@ -16,13 +16,13 @@ export const Profile = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const userName = useSelector<any,string>(state => state.auth.profile.name)
 
     const onNameChangeHandler = (newValue: string) => {
         const valueToBeSent = {
             name: newValue
         }
         dispatch(authThunks.changeUserName(valueToBeSent));
-        navigate(PATH.LOGIN);
     }
 
     const handleLogOut = () => {
@@ -37,7 +37,7 @@ export const Profile = () => {
                 <img className={s.profilePic} src={profileImg} alt="email_logo"/>
                 <div className={s.profileNameContainer}>
                     <EditableSpan
-                        value={"userName"}
+                        value={isLoggedIn ? userName : "Whoooo?"}
                         onChange={onNameChangeHandler}/>
                 </div>
                 <div className={s.emailInfo}>{"ds"}</div>
