@@ -12,12 +12,14 @@
 }
 
 .profileMenu {
-    margin-left: 75%;
+    margin-left: 65%;
+
+}
+.usrNameAndImgContainer{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .navBarProfileImg {
     /*position: absolute;
     margin-left: 80%;
@@ -36,8 +38,15 @@
 .navBarUserName {
     font-size: 15px;
     font-weight: 500;
+
     /*position: absolute;
     left: 70%;
     top: 42%;*/
 }
-
+.navlink {
+    text-decoration: none !important;
+    color: black !important;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+}

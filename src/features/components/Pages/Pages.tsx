@@ -36,9 +36,7 @@ export const Pages = () => {
             <div>
                 <Header/>
                 <Routes>
-                    {/*<Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
-                    <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
-*/}
+                    *<Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
                     <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>

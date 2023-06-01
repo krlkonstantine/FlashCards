@@ -19,6 +19,7 @@ export const Header = () => {
         redirect("/log-in")
     }
 
+
     return (
         <div id={'hw5-header'} className={s.header}>
                 <span className={s.loginContentContainer}>
@@ -29,13 +30,8 @@ export const Header = () => {
                     </span>
                 </span>
             <div className={s.profileMenu}>
-                <span className={s.navBarUserName}><BasicMenu userName={"asdasd"}/></span>
-                <img
-                    src={profileImg}
-                    id={'hw5-burger-menu'}
-                    className={s.navBarProfileImg}
-                    alt={'profile picture'}
-                />
+                <span className={s.navBarUserName}><BasicMenu  userName={"fdgdgdgdgdgdfgfd"}/></span>
+
             </div>
         </div>
 
