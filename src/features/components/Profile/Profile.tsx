@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import s from "features/components/Profile/Profile.module.css";
-import {NavLink, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {Button} from "@mui/material";
 import profileImg from "../../../common/assets/img/profile_pic.jpg"
-import {displayedEmail} from "features/components/Login/Login";
 import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useAppDispatch, useAppSelector} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
-import {useSelector} from "react-redux";
 
 
 export const Profile = () => {
