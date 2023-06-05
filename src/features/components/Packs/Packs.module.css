@@ -35,7 +35,7 @@
 /*    border-radius: 40px;*/
 /*    width: 180px;*/
 /*}*/
-.searchContainer {
+.sortOptionContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -46,22 +46,20 @@
     font-size: 15px;
     line-height: 1.2;
     margin-bottom: 5px;
-
 }
+
 .displayOptions {
     height: 70px;
     width: 100%;
     background-color: #a0aec7;
     margin: 5px 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 }
 
-.toggleContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.inputContainer{
+    margin-right: auto;
 }
 
 .toggleTitle {
@@ -83,4 +81,14 @@
     background-color: #b02a2a;
     width: 100%;
 
+}
+.filterClearBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 40px;
+    height: 36px;
 }

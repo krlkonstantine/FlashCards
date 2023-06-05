@@ -1,9 +1,13 @@
 
-
-.toggleButtons {
+.rangeInput {
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    padding-left: 15px;
+    padding-top: 4px;
+    width: 50px;
     height: 40px;
-}
 
-.toggleButton{
-    padding: 0 17px;
 }

@@ -16,9 +16,9 @@ export default function ColorToggleButton() {
     return (
         <ToggleButtonGroup
             className={s.toggleButtons}
-            color="primary"
+            color='primary'
             value={alignment}
-            exclusive
+            exclusive={ true}
             onChange={handleChange}
             aria-label="Platform"
         >
