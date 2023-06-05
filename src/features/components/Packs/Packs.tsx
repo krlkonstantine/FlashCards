@@ -17,7 +17,7 @@ export const Packs = () => {
                 <Button style={{borderRadius: 20, width: 180}} variant="contained">Add new pack</Button>
             </div>
             <div className={s.displayOptions}>
-                <span className={s.sortOptionContainer + s.inputContainer}>
+                <span className={s.sortOptionContainer}>
                     <span className={s.searchTitle}>Search</span>
                     <CustomizedInputBase/>
                 </span>
