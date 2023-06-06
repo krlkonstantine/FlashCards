@@ -5,7 +5,7 @@ import {Profile} from "features/components/Profile/Profile";
 import {ForgotPass} from "features/components/ForgotPass/ForgotPass";
 import {CheckEmail} from "features/components/CheckEmail/CheckEmail";
 import {Register} from "features/components/Register/Register";
-import {Packs} from "features/components/Packs/Packs";
+import {PacksPage} from "features/components/Packs/PacksPage";
 import {Cards} from "features/components/Cards/Cards";
 import {Learn} from "features/components/Learn/Learn";
 import {SetNewPass} from "features/components/SetNewPass/SetNewPass";
@@ -42,7 +42,7 @@ export const Pages = () => {
                     <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
                     <Route path={PATH.REGISTER} element={<Register/>}/>
-                    <Route path={PATH.PACKS} element={<Packs/>}/>
+                    <Route path={PATH.PACKS} element={<PacksPage/>}/>
                     <Route path={PATH.CARDS} element={<Cards/>}/>
                     <Route path={PATH.LEARN} element={<Learn/>}/>
                     <Route path={PATH.COUNTER} element={<Counter/>}/>
