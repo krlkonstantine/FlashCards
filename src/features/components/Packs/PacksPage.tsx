@@ -6,7 +6,7 @@ import ToggleButtons from 'features/components/Packs/DisplayOptionsComponents/To
 import {InputSlider} from "features/components/Packs/DisplayOptionsComponents/Slider/Slider";
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import IconButton from "@mui/material/IconButton";
-import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PacksTable";
+import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
 
 type TempPackType = {
     packName: string,

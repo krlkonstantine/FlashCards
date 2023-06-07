@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "features/components/CheckEmail/CheckEmail.module.css";
+import s from "./CheckEmail.module.css";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
 import {Button} from "@mui/material";

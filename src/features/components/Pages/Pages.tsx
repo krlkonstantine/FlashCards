@@ -14,6 +14,8 @@ import {NavLink} from 'react-router-dom'
 import s from "./Pages.module.css"
 import {Counter} from "features/counter/Counter";
 import {Header} from "features/components/Header/Header";
+import {EmptyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/EmptyPack";
+import {MyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/MyPack";
 
 export const PATH = {
     REGISTER: '/register',
@@ -27,6 +29,8 @@ export const PATH = {
     CARDS: '/cards',
     LEARN: '/learn',
     COUNTER: '/counter',
+    EMPTY_PACK: '/empty-pack',
+    MY_PACK: '/my-pack',
 }
 
 export const Pages = () => {
@@ -46,6 +50,8 @@ export const Pages = () => {
                     <Route path={PATH.CARDS} element={<Cards/>}/>
                     <Route path={PATH.LEARN} element={<Learn/>}/>
                     <Route path={PATH.COUNTER} element={<Counter/>}/>
+                    <Route path={PATH.EMPTY_PACK} element={<EmptyPack/>}/>
+                    <Route path={PATH.MY_PACK} element={<MyPack/>}/>
                     <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
                     {/*<Route path={"/set-new-password/:resetPasswordToken"} element={<SetNewPass/>}/>*/}
                     <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>

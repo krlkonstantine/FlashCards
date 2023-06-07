@@ -1,0 +1,71 @@
+
+.mainContainer {
+    width: 80%;
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+
+.mainTitle {
+    font-weight: 600;
+    color: black;
+    font-size: 26px;
+    line-height: 32px;
+    margin: 20px 0;
+
+}
+
+.packNameMenuContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.iconMenu {
+    justify-self: flex-start;
+}
+
+.pageContent {
+    align-self: center;
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardsTopPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+}
+
+.emptyPackMsg {
+    color: black;
+    opacity: 0.5;
+    font-size: 20px;
+    text-align: center;
+}
+
+.addNewCard {
+    border-radius: 20px;
+    margin-top: 40px;
+    width: 240px;
+    height: 40px;
+}
+
+.cardsList {
+    width: 100%;
+    margin-top: 10px;
+}
