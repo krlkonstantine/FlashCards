@@ -16,6 +16,7 @@ import {Counter} from "features/counter/Counter";
 import {Header} from "features/components/Header/Header";
 import {EmptyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/EmptyPack";
 import {MyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/MyPack";
+import {FriendsPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/FriendsPack/FriendsPack";
 
 export const PATH = {
     REGISTER: '/register',
@@ -31,6 +32,7 @@ export const PATH = {
     COUNTER: '/counter',
     EMPTY_PACK: '/empty-pack',
     MY_PACK: '/my-pack',
+    FRIENDS_PACK: '/friends-pack',
 }
 
 export const Pages = () => {
@@ -52,6 +54,7 @@ export const Pages = () => {
                     <Route path={PATH.COUNTER} element={<Counter/>}/>
                     <Route path={PATH.EMPTY_PACK} element={<EmptyPack/>}/>
                     <Route path={PATH.MY_PACK} element={<MyPack/>}/>
+                    <Route path={PATH.FRIENDS_PACK} element={<FriendsPack/>}/>
                     <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
                     {/*<Route path={"/set-new-password/:resetPasswordToken"} element={<SetNewPass/>}/>*/}
                     <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>

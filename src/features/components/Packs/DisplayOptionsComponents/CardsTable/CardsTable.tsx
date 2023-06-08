@@ -9,17 +9,12 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import {visuallyHidden} from '@mui/utils';
+import {Rating} from "@mui/material";
+import {CardActions} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/CardActions/CardActions";
 
 interface Data {
     question: string;
@@ -43,19 +38,19 @@ function createData(
 }
 
 const rows = [
-    createData('Cupcake', "lalala", "lalala", 4.3),
-    createData('Donut', "lalala", "lalala", 4.9),
-    createData('Eclair', "lalala", "lalala", 6.0),
-    createData('Frozen yoghurt', "lalala", "lalala", 4.0),
-    createData('Gingerbread', "lalala", "lalala", 3.9),
-    createData('Honeycomb', "lalala", "lalala", 6.5),
-    createData('Ice cream sandwich', "lalala", "lalala", 4.3),
-    createData('Jelly Bean', "lalala", "lalala", 0.0),
-    createData('KitKat', "lalala", "lalala", 7.0),
-    createData('Lollipop', "lalala", "lalala", 0.0),
-    createData('Marshmallow', "lalala", "lalala", 2.0),
-    createData('Nougat', "lalala", "lalala", 37.0),
-    createData('Oreo', "lalala", "lalala", 4.0),
+    createData('Cupcake', "lalala", "lalala", 4),
+    createData('Donut', "lalala", "lalala", 3),
+    createData('Eclair', "lalala", "lalala", 5),
+    createData('Frozen yoghurt', "lalala", "lalala", 4),
+    createData('Gingerbread', "lalala", "lalala", 3),
+    createData('Honeycomb', "lalala", "lalala", 2),
+    createData('Ice cream sandwich', "lalala", "lalala", 3),
+    createData('Jelly Bean', "lalala", "lalala", 1),
+    createData('KitKat', "lalala", "lalala", 2),
+    createData('Lollipop', "lalala", "lalala", 5),
+    createData('Marshmallow', "lalala", "lalala", 1),
+    createData('Nougat', "lalala", "lalala", 3),
+    createData('Oreo', "lalala", "lalala", 2),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -132,9 +127,9 @@ const headCells: readonly HeadCell[] = [
     },
     {
         id: 'grade',
-        numeric: true,
+        numeric: false,
         disablePadding: false,
-        label: 'Grade',
+        label: '',
     },
 ];
 
@@ -184,7 +179,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     );
 }
 
-export function CardsTable() {
+type CardstableType = {
+    actions?: boolean
+}
+
+export function CardsTable(props:CardstableType) {
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('lastUpdated');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -277,6 +276,7 @@ export function CardsTable() {
                         />
                         <TableBody>
                             {visibleRows.map((row, index) => {
+                                // @ts-ignore
                                 const isItemSelected = isSelected(row.question);
                                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -303,8 +303,10 @@ export function CardsTable() {
                                         </TableCell>
                                         <TableCell align="right">{row.answer}</TableCell>
                                         <TableCell align="right">{row.lastUpdated}</TableCell>
-                                        <TableCell align="right">{row.grade}</TableCell>
-                                        <TableCell align="right">{row.grade}</TableCell>
+                                        <TableCell align="right">
+                                            <Rating name="read-only" defaultValue={0} value={row.grade as number} readOnly/>
+                                        </TableCell>
+                                        {props.actions && <TableCell align="right"><CardActions/></TableCell>}
                                     </TableRow>
                                 );
                             })}

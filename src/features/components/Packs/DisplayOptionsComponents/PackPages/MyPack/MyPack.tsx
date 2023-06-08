@@ -6,7 +6,6 @@ import {Button} from "@mui/material";
 import CustomizedInputBase from "features/components/Packs/DisplayOptionsComponents/SearchInput/SearchInput";
 import {CardsTable} from "features/components/Packs/DisplayOptionsComponents/CardsTable/CardsTable";
 import {RedirectBar} from "common/components/RedirectBar/RedirectBar";
-import BasicMenu from "features/components/Menu/Menu";
 import {IconMenu} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/IconMenu/IconMenu";
 
 export const MyPack = () => {
@@ -22,11 +21,11 @@ export const MyPack = () => {
             <div className={s.cardsTopPart}>
                 <div className={s.packNameMenuContainer}>
                     <span className={s.mainTitle}>
-                   {"MyPackName"}
+                   {"MyPackTitle"}
                     </span>
                     <IconMenu/>
                 </div>
-                <Button style={{borderRadius: 20, width: 180}} variant="contained">Learn this pack</Button>
+                <Button style={{borderRadius: 20, width: 180}} variant="contained">Add new card</Button>
             </div>
             <div className={s.displayOptions}>
                 <span className={s.sortOptionContainer}>
@@ -35,7 +34,7 @@ export const MyPack = () => {
                 </span>
             </div>
             <div className={s.cardsList}>
-                <CardsTable/>
+                <CardsTable actions={true}/>
             </div>
         </div>
     );

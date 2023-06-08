@@ -1,0 +1,11 @@
+.cardActionsContainer{
+    padding-left: 20%;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.cardActionsContainer :hover{
+    color: #366EFF;
+}

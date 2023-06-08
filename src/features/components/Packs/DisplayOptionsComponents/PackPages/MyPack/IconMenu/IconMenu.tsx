@@ -74,7 +74,6 @@ export function IconMenu() {
                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
-
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <BorderColorIcon fontSize="small"/>
