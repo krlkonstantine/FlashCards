@@ -90,13 +90,12 @@ export default function AccountMenu(props: BasicMenuType) {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem>
-                    <NavLink className={s.navlink} to={PATH.PROFILE}>
+                    <NavLink className={s.basicMenuNavLink} to={PATH.PROFILE}>
                         <ListItemIcon>
                             <PersonOutlineIcon fontSize="small"/>
                         </ListItemIcon>
                         Profile
                     </NavLink>
-
                 </MenuItem>
                 <MenuItem onClick={handleLogOut}>
                     <ListItemIcon>

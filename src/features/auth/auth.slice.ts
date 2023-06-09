@@ -22,7 +22,7 @@ const slice = createSlice({
             })
             .addCase(logOut.fulfilled, (state, action) => {
                 state.isLoggedIn = false;
-
+                state.profile = null;
             })
             .addCase(changeUserName.fulfilled, (state, action) => {
                 if (state.profile) {

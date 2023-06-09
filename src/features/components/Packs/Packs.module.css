@@ -17,13 +17,12 @@
     padding: 15px 10px;
     margin: 0 auto;
     width: 75%;
-    margin-top: 15vh;
+    margin-top: 10vh;
 }
 
 .packsTopPart {
-    margin-top: 10px;
-    width: 90%;
-    background-color: #d9c4c4;
+    margin: 10px 0 30px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -34,10 +33,16 @@
     line-height: 27px;
 }
 
-/*.addPack {*/
-/*    border-radius: 40px;*/
-/*    width: 180px;*/
-/*}*/
+
+.displayOptionsContainer {
+    height: 70px;
+    width: 100%;
+    margin: 5px 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .sortOptionContainer {
     display: flex;
     flex-direction: column;
@@ -49,16 +54,6 @@
     font-size: 15px;
     line-height: 1.2;
     margin-bottom: 5px;
-}
-
-.displayOptions {
-    height: 70px;
-    width: 100%;
-    background-color: #a0aec7;
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .toggleTitle {

@@ -14,7 +14,8 @@ export const Profile = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    //const userName = useSelector<any,string>(state => state.auth.profile.name)
+    const userName = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.name : "notLogged")
+    const userEmail = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.email : "notLogged")
 
     const onNameChangeHandler = (newValue: string) => {
         const valueToBeSent = {
@@ -35,10 +36,10 @@ export const Profile = () => {
                 <img className={s.profilePic} src={profileImg} alt="email_logo"/>
                 <div className={s.profileNameContainer}>
                     <EditableSpan
-                        value={"Whoooo?"}
+                        value={userName}
                         onChange={onNameChangeHandler}/>
                 </div>
-                <div className={s.emailInfo}>{"ds"}</div>
+                <div className={s.emailInfo}>{userEmail}</div>
 
                 <Button onClick={handleLogOut}
                         className={s.redirectBtn}

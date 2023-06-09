@@ -7,43 +7,63 @@
     overflow-x: hidden;
     background-color: #FFFFFF;
     display: flex;
+    justify-content: center;
+}
+
+.headerContentContainer {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+}
+
+.navigationContentContainer {
 
 }
 
-.profileMenu {
-    margin-left: 65%;
-
+.navBarItem {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    opacity: 0.5;
+    text-decoration: none;
+    margin-right: 10px;
+    cursor: pointer;
 }
-.usrNameAndImgContainer{
+.navBarItem:hover{
+    color: black;
+    opacity: 0.8;
+}
+.profileMenuContainer {
+    /*margin-left: 65%;*/
+}
+
+/*.usrNameAndImgContainer{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .navBarProfileImg {
-    /*position: absolute;
-    margin-left: 80%;
-    top: 30%;*/
-    width: 32px;
+position: absolute;
+margin-left: 80%;
+top: 30%;
+width: 32px;
     height: auto;
     border-radius: 50%;
 }
 
-.navBarLoginInfo {
-    font-size: 20px;
-    font-weight: 600;
-    color: red;
-}
-
-.navBarUserName {
+*/
+.basicMenuContainer {
+    padding-left: 80px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
 
     /*position: absolute;
     left: 70%;
     top: 42%;*/
 }
-.navlink {
+
+.basicMenuNavLink {
     text-decoration: none !important;
     color: black !important;
     vertical-align: top;
