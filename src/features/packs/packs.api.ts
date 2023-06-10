@@ -7,20 +7,22 @@ import {
 } from "features/auth/auth.apiTypes";
 
 
+export const packsApi = {
 
-export const authApi = {
-
-    register: (arg:ArgRegisterType) => {
+	getPacks: () => {
+		return instance.get<any>('/cards/pack')
+	},
+	register: (arg:ArgRegisterType) => {
         return instance.post<RegisterResponseType>('auth/register', arg)
     },
 	login: (arg:ArgLoginType) => {
 		return instance.post<any>('auth/login',arg)
 	},
-    forgotPass: (arg:ArgForgotPass) => {
+	forgotPass: (arg:ArgForgotPass) => {
 		// TODO
 		return instance.post<any>('auth/forgot',arg)
 	},
-    setNewPass: (arg:ArgSetNewPass) => {
+	setNewPass: (arg:ArgSetNewPass) => {
 		// TODO
 		return instance.post<ArgSetNewPassResponseType>('auth/set-new-password',arg)
 	},

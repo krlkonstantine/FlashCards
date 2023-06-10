@@ -1,16 +1,18 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ArgChangeUserName, ArgLoginType, ArgRegisterType, authApi, ProfileType} from "features/auth/auth.api";
+import {ArgChangeUserName, ArgLoginType, ArgRegisterType} from "features/auth/auth.apiTypes";
+import {authApi} from "features/auth/auth.api";
 import {AppDispatch, RootState} from "app/store";
 import {appActions} from "app/app.slice";
 import {thunkTryCatch} from "common/utils/thunkTryCatch";
 import {CreateAppAsyncThunk} from "common/utils";
+import {ProfileType} from "features/auth/auth.apiTypes";
 
 const slice = createSlice({
 
     name: "auth",
     initialState: {
         profile: null as ProfileType | null,
-        isLoggedIn:false
+        isLoggedIn: false,
     },
     reducers: {},
     extraReducers: builder => {
@@ -50,6 +52,7 @@ const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
         //как обрабатываем ошибки?
         //деструкт.достаем нужные методы из санкАПИ
         return thunkTryCatch(thunkAPI, async () => {
+                console.log(arg)
                 const res = await authApi.login(arg)
                 const profileData = res.data
                 return {profile: res.data}

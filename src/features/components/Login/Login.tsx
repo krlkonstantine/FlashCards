@@ -10,7 +10,6 @@ import {useAppDispatch} from "common/hooks";
 import {useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-export let displayedEmail: string
 
 
 export const Login = () => {
@@ -23,7 +22,6 @@ export const Login = () => {
 
 
     const onSubmit = (data: any) => {
-        reset()
         alert(JSON.stringify(data))
         dispatch(authThunks.login(data))
             .unwrap()
@@ -70,7 +68,7 @@ export const Login = () => {
                     </label>
                     <FormControlLabel
                         style={{color: "black", marginBottom: 0}}
-                        control={<Checkbox defaultChecked/>} label="Remember me"/>
+                        control={<Checkbox defaultChecked/>}  {...register('rememberMe')} label="Remember me"/>
                     <div className={s.forgotPassText}>
                         <NavLink
                             to={PATH.FORGOT_PASS}
