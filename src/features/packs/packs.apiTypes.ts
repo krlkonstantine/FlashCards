@@ -2,7 +2,7 @@
 
 
 export type GetPacksResponseType = {
-    cardPacks: PackType[];
+    cardPacks: CardPacksType[];
     page: number;
     pageCount: number;
     cardPacksTotalCount: number;
@@ -12,7 +12,8 @@ export type GetPacksResponseType = {
     tokenDeathTime: number;
 }
 
-export type PackType = {
+export type CardPacksType = {
+    actions: any;
     _id: string;
     user_id: string;
     user_name: string;

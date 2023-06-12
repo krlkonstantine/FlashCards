@@ -1,25 +1,36 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ArgChangeUserName, ArgLoginType, ArgRegisterType, ProfileType} from "features/auth/auth.apiTypes";
-import {AppDispatch, RootState} from "app/store";
-import {appActions} from "app/app.slice";
-import {thunkTryCatch} from "common/utils/thunkTryCatch";
+import {createSlice} from "@reduxjs/toolkit";
+
 import {CreateAppAsyncThunk} from "common/utils";
-import {GetPacksResponseType, PackType} from "../packs/packs.apiTypes";
-import {authApi} from "features/auth/auth.api";
+import {GetPacksResponseType, CardPacksType} from "../packs/packs.apiTypes";
 import {packsApi} from "features/packs/packs.api";
 
 const slice = createSlice({
 
     name: "packs",
     initialState: {
-        packState: null as GetPacksResponseType | null,
+        packs: null as CardPacksType[] | null,
+        page: null as number | null,
+        pageCount: null as number | null,
+        cardPacksTotalCount: null as number | null,
+        minCardsCount: 0,
+        maxCardsCount: 0,
+        queryParams: {
+            packName: "",
+            min: 0,
+            max: 0,
+            sortPacks: "",
+            page: 1,
+            pageCount: 0,
+            user_id: "",
+            block: false,
+        },
 
     },
     reducers: {},
     extraReducers: builder => {
         builder
             .addCase(getPacks.fulfilled, (state, action) => {
-                state.packState = action.payload.packState;
+                state.packs = action.payload.packState;
 
             })
         /*.addCase(logOut.fulfilled, (state, action) => {
@@ -39,7 +50,7 @@ const slice = createSlice({
 const getPacks = CreateAppAsyncThunk<any, any>('packs/getPacks',
     async (thunkAPI) => {
         const res = await packsApi.getPacks()
-        return {packState: res.data}
+        return {packs: res.data}
     })
 
 

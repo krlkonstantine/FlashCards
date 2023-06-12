@@ -62,7 +62,7 @@ export const Pages = () => {
                     {/*роут для несуществующей страницы должен отрисовать <Error404 />*/}
                     <Route path={'/404'} element={<Error/>}/>
                 </Routes>
-                <NavLink className={s.navlinks}
+                {/*<NavLink className={s.navlinks}
                          to={PATH.PROFILE}
                 >Profile</NavLink>
                 <NavLink className={s.navlinks}
@@ -76,7 +76,7 @@ export const Pages = () => {
                 >Log in</NavLink>
                 <NavLink className={s.navlinks}
                          to={PATH.REGISTER}
-                >Register</NavLink>
+                >Register</NavLink>*/}
             </div>
         </HashRouter>
 

@@ -17,7 +17,13 @@ export const Profile = () => {
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const userName = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.name : "notLogged")
     const userEmail = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.email : "notLogged")
-    const packs = useAppSelector(state => state.packs.packState !== null ? state.packs.packState.cardPacks : "no packs found")
+    const packs = useAppSelector(state => state.packs.packs)
+
+    useEffect(()=>{
+        if (!isLoggedIn){
+            navigate("/login")
+        }
+    },[isLoggedIn])
 
     const onNameChangeHandler = (newValue: string) => {
         const valueToBeSent = {

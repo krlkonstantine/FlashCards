@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from "./Packs.module.css";
 import {Button} from "@mui/material";
 import CustomizedInputBase from "features/components/Packs/DisplayOptionsComponents/SearchInput/SearchInput";
@@ -7,98 +7,25 @@ import {InputSlider} from "features/components/Packs/DisplayOptionsComponents/Sl
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import IconButton from "@mui/material/IconButton";
 import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
-
-type TempPackType = {
-    packName: string,
-    cardsQuantity: number,
-    lastUpdated: string,
-    createdBy: string,
-    actions: boolean,
-    cards: TempCardsType[]
-}
-type TempCardsType = {
-    question: string,
-    answer: string,
-    lastUpdated: string,
-    grade: number,
-}
+import {packsThunks} from "features/packs/packs.slice";
+import {useAppDispatch, useAppSelector} from "common/hooks";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 
-const tempCardsPack: TempPackType[] = [
-    {
-        packName: "English",
-        cardsQuantity: 25,
-        lastUpdated: "05.06.2023",
-        createdBy: "KonstantineK",
-        actions: true,
-        cards: [
-            {
-                question: "How do you translate DOG",
-                answer: "собака",
-                lastUpdated: "01.06.2023",
-                grade: 2,
-            }, {
-                question: "How do you translate CAT",
-                answer: "кошка",
-                lastUpdated: "01.06.2023",
-                grade: 2,
-            }, {
-                question: "How do you translate FROG",
-                answer: "лягушка",
-                lastUpdated: "02.06.2023",
-                grade: 2,
-            },
-        ]
-    },
-    {
-        packName: "German",
-        cardsQuantity: 12,
-        lastUpdated: "12.11.2021",
-        createdBy: "Anatoly",
-        actions: false,
-        cards: []
-    },
-    {
-        packName: "React",
-        cardsQuantity: 56,
-        lastUpdated: "02.12.2012",
-        createdBy: "Mathew",
-        actions: false,
-        cards: []
-    },
-    {
-        packName: "Redux",
-        cardsQuantity: 24,
-        lastUpdated: "03.03.2022",
-        createdBy: "Nadezhda",
-        actions: false,
-        cards: [{
-            question: "How do you translate DOG",
-            answer: "собака",
-            lastUpdated: "01.06.2023",
-            grade: 2,
-        }, {
-            question: "How do you translate CAT",
-            answer: "кошка",
-            lastUpdated: "01.06.2023",
-            grade: 2,
-        }, {
-            question: "How do you translate FROG",
-            answer: "лягушка",
-            lastUpdated: "02.06.2023",
-            grade: 2,
-        },]
-    },
-    {
-        packName: "Typescript",
-        cardsQuantity: 18,
-        lastUpdated: "05.06.2023",
-        createdBy: "KonstantineK",
-        actions: true,
-        cards: []
-    },
-]
 export const PacksPage = () => {
+    const dispatch = useAppDispatch()
+    const packs = useAppSelector(state => state.packs.packs)
+
+    const getPacksHandler = () => {
+        dispatch(packsThunks.getPacks({}))
+        console.log(packs)
+    }
+
+    /*useEffect(()=>{
+        dispatch(packsThunks.getPacks({}))
+        console.log("tried to get the packs in packs page")
+    },[])*/
+
     return (
         <div className={s.packsContainer}>
             <div className={s.packsTopPart}>
@@ -127,8 +54,13 @@ export const PacksPage = () => {
                 </span>
             </div>
             <div className={s.packsList}>
-                <PacksTable/>
+                {packs && <PacksTable/>}
             </div>
+            <Button onClick={getPacksHandler}
+                    className={s.redirectBtn}
+                    variant="outlined" startIcon={<LogoutIcon/>}>
+                Get Packs BABY!
+            </Button>
         </div>
     );
 };

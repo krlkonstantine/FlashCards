@@ -1,3 +1,4 @@
+/*
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -12,27 +13,29 @@ import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import {visuallyHidden} from '@mui/utils';
+import {useAppSelector} from "common/hooks";
+
 
 interface Data {
-    cards: number;
-    actions: number;
-    lastUpdated: string;
     name: string;
-    createdBy: string;
+    cardsCount: number;
+    updated: string;
+    user_name: string;
+    actions: number;
 }
 
 function createData(
     name: string,
-    cards: number,
-    lastUpdated: string,
-    createdBy: string,
+    cardsCount: number,
+    updated: string,
+    user_name: string,
     actions: number,
 ): Data {
     return {
         name,
-        cards,
-        lastUpdated,
-        createdBy,
+        cardsCount,
+        updated,
+        user_name,
         actions,
     };
 }
@@ -108,19 +111,19 @@ const headCells: readonly HeadCell[] = [
         label: 'Name',
     },
     {
-        id: 'cards',
+        id: 'cardsCount',
         numeric: true,
         disablePadding: false,
         label: 'Cards',
     },
     {
-        id: 'lastUpdated',
+        id: 'updated',
         numeric: true,
         disablePadding: false,
         label: 'Last Updated',
     },
     {
-        id: 'createdBy',
+        id: 'user_name',
         numeric: true,
         disablePadding: false,
         label: 'Created by',
@@ -181,11 +184,12 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 export function PacksTable() {
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('lastUpdated');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('updated');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const packs = useAppSelector(state => state.packs.packState !== null ? state.packs.packState.cardPacks : "no packs found")
 
     const handleRequestSort = (
         event: React.MouseEvent<unknown>,
@@ -197,12 +201,14 @@ export function PacksTable() {
     };
 
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.checked) {
-            const newSelected = rows.map((n) => n.name);
+        /!*if (event.target.checked) {
+            if (typeof packs !== "string") {
+                const newSelected = packs.map((n) => n.name);
+            }
             setSelected(newSelected);
             return;
         }
-        setSelected([]);
+        setSelected([]);*!/
     };
 
     const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
@@ -242,11 +248,12 @@ export function PacksTable() {
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - packs.length) : 0;
 
+    // @ts-ignore
     const visibleRows = React.useMemo(
         () =>
-            stableSort(rows, getComparator(order, orderBy)).slice(
+            stableSort(packs, getComparator(order, orderBy)).slice(
                 page * rowsPerPage,
                 page * rowsPerPage + rowsPerPage,
             ),
@@ -268,21 +275,21 @@ export function PacksTable() {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={rows.length}
+                            rowCount={packs.length}
                         />
                         <TableBody>
-                            {visibleRows.map((row, index) => {
-                                const isItemSelected = isSelected(row.name);
+                            {visibleRows.map((packs, index) => {
+                                const isItemSelected = isSelected(packs.name);
                                 const labelId = `enhanced-table-checkbox-${index}`;
 
                                 return (
                                     <TableRow
                                         hover
-                                        onClick={(event) => handleClick(event, row.name)}
+                                        onClick={(event) => handleClick(event, packs.name)}
                                         role="checkbox"
                                         aria-checked={isItemSelected}
                                         tabIndex={-1}
-                                        key={row.name}
+                                        key={packs.name}
                                         selected={isItemSelected}
                                         sx={{cursor: 'pointer'}}
                                     >
@@ -294,12 +301,12 @@ export function PacksTable() {
                                             scope="row"
                                             padding="none"
                                         >
-                                            {row.name}
+                                            {packs.name}
                                         </TableCell>
-                                        <TableCell align="right">{row.cards}</TableCell>
-                                        <TableCell align="right">{row.lastUpdated}</TableCell>
-                                        <TableCell align="right">{row.createdBy}</TableCell>
-                                        <TableCell align="right">{row.actions}</TableCell>
+                                        <TableCell align="right">{packs.cardsCount}</TableCell>
+                                        <TableCell align="right">{packs.updated}</TableCell>
+                                        <TableCell align="right">{packs.user_name}</TableCell>
+                                        <TableCell align="right">{packs.actions}</TableCell>
                                     </TableRow>
                                 );
                             })}
@@ -318,7 +325,7 @@ export function PacksTable() {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={rows.length}
+                    count={packs.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
@@ -330,5 +337,76 @@ export function PacksTable() {
                 label="Dense padding"
             />
         </Box>
+    );
+}
+*/
+
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "common/hooks";
+import {packsThunks} from "features/packs/packs.slice";
+
+
+
+function createData(
+    name: string,
+    cardsCount: number,
+    updated: string,
+    userName: string,
+    actions: number,
+) {
+    return { name, cardsCount, updated, userName,  actions };
+}
+
+const rows = [
+    createData('Frozen yoghurt', 159, "6.0", "24", 4.0),
+    createData('Ice cream sandwich', 237, "9.0", "37", 4.3),
+    createData('Eclair', 262, "16.0", "24", 6.0),
+    createData('Cupcake', 305, "3.7", "67", 4.3),
+    createData('Gingerbread', 356, "16.0", "49", 3.9),
+];
+
+
+
+export  function PacksTable() {
+    const packs = useAppSelector(state => state.packs.packs)
+
+    return (
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Name (100g serving)</TableCell>
+                        <TableCell align="right">Cards</TableCell>
+                        <TableCell align="right">Created by</TableCell>
+                        <TableCell align="right">Updated</TableCell>
+                        <TableCell align="right">Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {packs && packs.map((pack) => (
+                        <TableRow
+                            key={pack.name}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {pack.name}
+                            </TableCell>
+                            <TableCell align="right">{pack.cardsCount}</TableCell>
+                            <TableCell align="right">{pack.updated}</TableCell>
+                            <TableCell align="right">{pack.user_name}</TableCell>
+                            <TableCell align="right">{pack.actions}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }

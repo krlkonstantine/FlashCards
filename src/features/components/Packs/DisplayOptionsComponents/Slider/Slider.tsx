@@ -35,6 +35,9 @@ export function InputSlider() {
     /* const handleChange = (event: Event, newValue: number | number[]) => {
          setValue(newValue as number[]);
      };*/
+    const onChangeCommited = () =>{
+        //TODO
+    }
 
     const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue1(Number(event.target.value));
