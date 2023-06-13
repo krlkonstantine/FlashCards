@@ -10,11 +10,17 @@ import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/Pac
 import {packsThunks} from "features/packs/packs.slice";
 import {useAppDispatch, useAppSelector} from "common/hooks";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { getQueryParamsFiltrated } from 'common/utils/getQueryParamsFiltrated';
 
 
 export const PacksPage = () => {
     const dispatch = useAppDispatch()
-    const packs = useAppSelector(state => state.packs.packs)
+    const packs = useAppSelector((state) => state.packs.packs)
+    const allQueryParams = useAppSelector((state) => state.packs.queryParams);
+
+    useEffect(() => {
+        dispatch(packsThunks.getPacks(getQueryParamsFiltrated(allQueryParams)));
+    }, [allQueryParams,dispatch]);
 
     const getPacksHandler = () => {
         dispatch(packsThunks.getPacks({}))
@@ -56,11 +62,7 @@ export const PacksPage = () => {
             <div className={s.packsList}>
                 {packs && <PacksTable/>}
             </div>
-            <Button onClick={getPacksHandler}
-                    className={s.redirectBtn}
-                    variant="outlined" startIcon={<LogoutIcon/>}>
-                Get Packs BABY!
-            </Button>
+
         </div>
     );
 };

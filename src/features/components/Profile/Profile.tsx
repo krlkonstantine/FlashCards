@@ -59,11 +59,6 @@ export const Profile = () => {
                         variant="outlined" startIcon={<LogoutIcon/>}>
                     Log out
                 </Button>
-                <Button onClick={getPacksHandler}
-                        className={s.redirectBtn}
-                        variant="outlined" startIcon={<LogoutIcon/>}>
-                    Get Packs BABY!
-                </Button>
             </div>
         </div>
     );

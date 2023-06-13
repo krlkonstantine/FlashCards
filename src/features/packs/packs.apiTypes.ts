@@ -1,5 +1,14 @@
 //types
-
+export type ArgGetPacksType = {
+    packName?: string; // не обязательно
+    min?: number; // не обязательно
+    max?: number; // не обязательно
+    sortPacks?: string; // не обязательно TODO
+    page?: number; // не обязательно
+    pageCount?: number; // не обязательно
+    user_id?: string; // чьи колоды не обязательно, или придут все
+    block?: boolean;
+};
 
 export type GetPacksResponseType = {
     cardPacks: CardPacksType[];

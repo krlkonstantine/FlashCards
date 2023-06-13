@@ -1,7 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {CreateAppAsyncThunk} from "common/utils";
-import {GetPacksResponseType, CardPacksType} from "../packs/packs.apiTypes";
+import {CreateAppAsyncThunk, thunkTryCatch} from "common/utils";
+import {GetPacksResponseType, CardPacksType, ArgGetPacksType} from "../packs/packs.apiTypes";
 import {packsApi} from "features/packs/packs.api";
 
 const slice = createSlice({
@@ -29,28 +29,24 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(getPacks.fulfilled, (state, action) => {
-                state.packs = action.payload.packState;
-
+            .addCase(getPacks.fulfilled, (state, action:PayloadAction<{response:GetPacksResponseType}>) => {
+                const packs = action.payload.response
+                state.packs = packs.cardPacks
+                alert("GOT THE PACKS!")
             })
-        /*.addCase(logOut.fulfilled, (state, action) => {
-            state.isLoggedIn = false;
-            state.profile = null;
-        })
-        .addCase(changeUserName.fulfilled, (state, action) => {
-            if (state.profile) {
-                state.profile.name = action.payload
-            }
-        })*/
-
     }
 })
 
 
-const getPacks = CreateAppAsyncThunk<any, any>('packs/getPacks',
-    async (thunkAPI) => {
-        const res = await packsApi.getPacks()
-        return {packs: res.data}
+
+
+const getPacks = CreateAppAsyncThunk<{ response: GetPacksResponseType }, any>('packs/getPacks',
+    async (payload: any, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const res = await packsApi.getPacks();
+            console.log(res)
+            return {response: res.data}
+        })
     })
 
 

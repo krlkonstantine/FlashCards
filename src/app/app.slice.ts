@@ -18,6 +18,7 @@ const slice = createSlice({
             state.isLoading = action.payload.isLoading
         },
         setError: (state, action: PayloadAction<{ error: string | null }>) => {
+            debugger
             state.error = action.payload.error
         }
     },
@@ -36,11 +37,8 @@ const slice = createSlice({
             .addMatcher(
                 (action) => action.type.endsWith("/rejected"),
                 (state, action) => {
-                    state.isLoading = false;
 
-                    if (!action.payload.showGlobalError) return;
-
-
+                    //if (!action.payload.showGlobalError) return;
                     const err = action.payload.e as Error | AxiosError<{ error: string }>;
                     if (isAxiosError(err)) {
                         state.error = err.response ? err.response.data.error : err.message;
