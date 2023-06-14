@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {CreateAppAsyncThunk, thunkTryCatch} from "common/utils";
-import {GetPacksResponseType, CardPacksType, ArgGetPacksType} from "../packs/packs.apiTypes";
+import {GetPacksResponseType, CardPacksType, ArgGetPacksType, ArgAddNewPack} from "../packs/packs.apiTypes";
 import {packsApi} from "features/packs/packs.api";
 
 const slice = createSlice({
@@ -28,15 +28,16 @@ const slice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-            .addCase(getPacks.fulfilled, (state, action:PayloadAction<{response:GetPacksResponseType}>) => {
+            .addCase(getPacks.fulfilled, (state, action: PayloadAction<{ response: GetPacksResponseType }>) => {
                 const packs = action.payload.response
                 state.packs = packs.cardPacks
                 alert("GOT THE PACKS!")
             })
+            .addCase(addNewPack.fulfilled, (state,action: PayloadAction<{response: any}>) =>{
+
+            })
     }
 })
-
-
 
 
 const getPacks = CreateAppAsyncThunk<{ response: GetPacksResponseType }, any>('packs/getPacks',
@@ -47,8 +48,21 @@ const getPacks = CreateAppAsyncThunk<{ response: GetPacksResponseType }, any>('p
             return {response: res.data}
         })
     })
+const addPackArgs = {
+    name: "WOW! That's a brand new pak"
+}
+
+const addNewPack = CreateAppAsyncThunk<{ response: any }, any>('packs/addNewPack',
+    async (payload: any, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const {dispatch} = thunkAPI
+            const res = await packsApi.addPack(addPackArgs)
+            dispatch(getPacks)
+            return {response: res.data}
+        })
+    })
 
 
 export const packsReducer = slice.reducer
 //export const authActions = slice.actions
-export const packsThunks = {getPacks}
+export const packsThunks = {getPacks,addNewPack}

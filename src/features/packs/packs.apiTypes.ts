@@ -46,9 +46,9 @@ export type CardPacksType = {
 
 //ADD NEW PACK
 export type ArgAddNewPack = {
-    name?: string // если не отправить будет "no Name"
-    deckCover?: string // не обязателен
-    private?: boolean // если не отправить будет false
+        name?: string // если не отправить будет "no Name"
+        deckCover?: string // не обязателен
+        private?: boolean // если не отправить будет false
 }
 
 export type AddNewPackResponseType = {

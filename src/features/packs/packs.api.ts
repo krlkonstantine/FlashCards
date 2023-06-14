@@ -14,7 +14,9 @@ export const packsApi = {
 		return instance.get<GetPacksResponseType>('/cards/pack')
 	},
 	addPack: (arg: ArgAddNewPack) => {
-		return instance.post<AddNewPackResponseType>('/cards/pack/',arg)
+		return instance.post<AddNewPackResponseType>('/cards/pack/', {
+			cardsPack: arg
+		})
 	},
 	deletePack: (id: string) => {
 		return instance.delete<DeletePackResponseType>('/cards/pack/', {

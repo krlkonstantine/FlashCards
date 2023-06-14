@@ -19,7 +19,12 @@ export const PacksPage = () => {
         dispatch(packsThunks.getPacks({}));
     }, [dispatch]);
 
-
+    const addPackArgs = {
+        name: "WOW! That's a brand new pak"
+    }
+    const addNewPackHandler = () => {
+        dispatch(packsThunks.addNewPack(addPackArgs))
+    }
 
     /*useEffect(()=>{
         dispatch(packsThunks.getPacks({}))
@@ -32,7 +37,10 @@ export const PacksPage = () => {
                 <span className={s.packList}>
                     Packs list
                 </span>
-                <Button style={{borderRadius: 20, width: 180}} variant="contained">Add new pack</Button>
+                <Button
+                    style={{borderRadius: 20, width: 180, textTransform: "none"}}
+                    variant="contained" onClick={addNewPackHandler}
+                >Add new pack</Button>
             </div>
             <div className={s.displayOptionsContainer}>
                 <span className={s.sortOptionContainer}>
