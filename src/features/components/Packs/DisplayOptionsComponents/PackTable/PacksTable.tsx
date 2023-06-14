@@ -352,10 +352,6 @@ import Paper from '@mui/material/Paper';
 import { useAppSelector} from "common/hooks";
 
 
-
-
-
-
 export  function PacksTable() {
     const packs = useAppSelector((state) => state.packs.packs)
 

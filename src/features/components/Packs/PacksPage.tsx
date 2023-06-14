@@ -9,23 +9,17 @@ import IconButton from "@mui/material/IconButton";
 import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
 import {packsThunks} from "features/packs/packs.slice";
 import {useAppDispatch, useAppSelector} from "common/hooks";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { getQueryParamsFiltrated } from 'common/utils/getQueryParamsFiltrated';
 
 
 export const PacksPage = () => {
     const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
-    const allQueryParams = useAppSelector((state) => state.packs.queryParams);
 
     useEffect(() => {
-        dispatch(packsThunks.getPacks(getQueryParamsFiltrated(allQueryParams)));
-    }, [allQueryParams,dispatch]);
+        dispatch(packsThunks.getPacks({}));
+    }, [dispatch]);
 
-    const getPacksHandler = () => {
-        dispatch(packsThunks.getPacks({}))
-        console.log(packs)
-    }
+
 
     /*useEffect(()=>{
         dispatch(packsThunks.getPacks({}))

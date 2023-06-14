@@ -24,7 +24,6 @@ const slice = createSlice({
             user_id: "",
             block: false,
         },
-
     },
     reducers: {},
     extraReducers: builder => {

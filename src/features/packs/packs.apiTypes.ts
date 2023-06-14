@@ -1,4 +1,7 @@
 //types
+
+
+//GET PACKS
 export type ArgGetPacksType = {
     packName?: string; // не обязательно
     min?: number; // не обязательно
@@ -38,4 +41,41 @@ export type CardPacksType = {
     created: string;
     updated: string;
     __v: number;
+}
+
+
+//ADD NEW PACK
+export type ArgAddNewPack = {
+    name?: string // если не отправить будет "no Name"
+    deckCover?: string // не обязателен
+    private?: boolean // если не отправить будет false
+}
+
+export type AddNewPackResponseType = {
+    more: {
+        body: {
+            name: string
+        }
+    },
+    "error": string,
+    "in": string,
+    "info": string
+}
+
+//CHANGE PACK
+export type ArgChangePack = {
+    _id: string
+    name?: string
+}
+
+export type ChangePackResponseType = {
+    updatedCardsPack: any
+}
+//DELETE PACK
+export type ArgDeletePack = {
+    id: any
+}
+
+export type DeletePackResponseType = {
+    deletedCardsPack: any
 }
