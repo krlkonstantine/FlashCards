@@ -2,28 +2,39 @@ import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import s from "./ToggleButtons.module.css"
+import {useAppDispatch, useAppSelector} from "common/hooks";
+import {packsActions} from "features/packs/packs.slice";
+
 
 export default function ColorToggleButton() {
-    const [alignment, setAlignment] = React.useState('web');
+    const dispatch = useAppDispatch()
+    const myUserId = useAppSelector((state) => state.auth.profile?._id)
+    const [alignment, setAlignment] = React.useState<"my" | "all">("all");
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
-        newAlignment: string,
+        newAlignment: "my" | "all",
     ) => {
         setAlignment(newAlignment);
-    };
+        alert(myUserId)
+        dispatch(packsActions.setFilterByAuthor(newAlignment === "my"
+            ? {user_id: myUserId}
+            : "")
+        )
+    }
 
     return (
         <ToggleButtonGroup
+            sx={{ToggleButtonGroupPropsColorOverrides: "red"}}
             className={s.toggleButtons}
             color='primary'
             value={alignment}
-            exclusive={ true}
+            exclusive={true}
             onChange={handleChange}
             aria-label="Platform"
         >
-            <ToggleButton className={s.toggleButton} value="web">My</ToggleButton>
-            <ToggleButton className={s.toggleButton} value="android">All</ToggleButton>
+            <ToggleButton className={s.toggleButton} value="my">My</ToggleButton>
+            <ToggleButton className={s.toggleButton} value="all">All</ToggleButton>
         </ToggleButtonGroup>
     );
 }

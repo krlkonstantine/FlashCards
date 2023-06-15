@@ -8,5 +8,5 @@
 .toggleButton{
     padding: 0 17px;
     width: 90px;
-
+    text-transform: none;
 }

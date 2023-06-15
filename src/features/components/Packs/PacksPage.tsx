@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./Packs.module.css";
 import {Button} from "@mui/material";
 import CustomizedInputBase from "features/components/Packs/DisplayOptionsComponents/SearchInput/SearchInput";
@@ -14,14 +14,16 @@ import {useAppDispatch, useAppSelector} from "common/hooks";
 export const PacksPage = () => {
     const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
+    const filterQueryParams = useAppSelector((state)=> state.packs.queryParams)
 
     useEffect(() => {
         dispatch(packsThunks.getPacks({}));
-    }, [dispatch]);
+    }, [filterQueryParams]);
 
     const addPackArgs = {
         name: "WOW! That's a brand new pak"
     }
+
     const addNewPackHandler = () => {
         dispatch(packsThunks.addNewPack(addPackArgs))
     }
@@ -49,7 +51,7 @@ export const PacksPage = () => {
                 </span>
                 <span className={s.sortOptionContainer}>
                     <span className={s.toggleTitle}>Show card packs</span>
-                    <ToggleButtons/>
+                    <ToggleButtons />
                 </span>
                 <span className={s.sortOptionContainer}>
                     <span className={s.toggleTitle}>Cards per pack</span>

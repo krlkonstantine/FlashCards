@@ -37,14 +37,14 @@ const slice = createSlice({
 
 
 const register = CreateAppAsyncThunk<void, ArgRegisterType>
-('auth/register', async (arg, thunkAPI) => {
+('auth/register',
+    async (arg, thunkAPI) => {
     //создали санку, теперь подключаем ранее соданную апишку
     //первым параметром передаем санк апи
     //вторым передаем саму нашу логику норм сценария
     return thunkTryCatch(thunkAPI, async () => {
         await authApi.register(arg)
     })
-
 })
 
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',

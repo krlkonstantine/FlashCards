@@ -25,44 +25,49 @@ const slice = createSlice({
             block: false,
         },
     },
-    reducers: {},
+    reducers: {
+        setFilterByAuthor: (state,action) => {
+            debugger
+                state.queryParams.user_id = action.payload.user_id
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(getPacks.fulfilled, (state, action: PayloadAction<{ response: GetPacksResponseType }>) => {
                 const packs = action.payload.response
                 state.packs = packs.cardPacks
                 alert("GOT THE PACKS!")
+                console.log(state)
             })
-            .addCase(addNewPack.fulfilled, (state,action: PayloadAction<{response: any}>) =>{
+            .addCase(addNewPack.fulfilled, (state, action: PayloadAction<{ response: any }>) => {
 
             })
     }
 })
 
 
-const getPacks = CreateAppAsyncThunk<{ response: GetPacksResponseType }, any>('packs/getPacks',
-    async (payload: any, thunkAPI) => {
+const getPacks = CreateAppAsyncThunk<{ response: GetPacksResponseType }, ArgGetPacksType>('packs/getPacks',
+    async (payload: ArgGetPacksType, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
-            const res = await packsApi.getPacks();
+            const res = await packsApi.getPacks(payload);
             console.log(res)
             return {response: res.data}
         })
     })
-const addPackArgs = {
-    name: "WOW! That's a brand new pak"
-}
 
-const addNewPack = CreateAppAsyncThunk<{ response: any }, any>('packs/addNewPack',
-    async (payload: any, thunkAPI) => {
+
+const addNewPack = CreateAppAsyncThunk<{ response: any }, ArgAddNewPack>
+('packs/addNewPack',
+    async (arg, thunkAPI) => {
         return thunkTryCatch(thunkAPI, async () => {
             const {dispatch} = thunkAPI
-            const res = await packsApi.addPack(addPackArgs)
-            dispatch(getPacks)
+            const res = await packsApi.addPack(arg)
+            dispatch(getPacks(thunkAPI.getState().packs.queryParams))
             return {response: res.data}
         })
     })
 
 
 export const packsReducer = slice.reducer
-//export const authActions = slice.actions
-export const packsThunks = {getPacks,addNewPack}
+export const packsActions = slice.actions
+export const packsThunks = {getPacks, addNewPack}

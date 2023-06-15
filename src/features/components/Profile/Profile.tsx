@@ -8,16 +8,14 @@ import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
 import LogoutIcon from '@mui/icons-material/Logout';
 import {useAppDispatch, useAppSelector} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
-import {packsThunks} from "features/packs/packs.slice";
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const userName = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.name : "notLogged")
-    const userEmail = useAppSelector(state => state.auth.profile !== null ? state.auth.profile.email : "notLogged")
-    const packs = useAppSelector(state => state.packs.packs)
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+    const userName = useAppSelector((state) => state.auth.profile !== null ? state.auth.profile.name : "notLogged")
+    const userEmail = useAppSelector((state) => state.auth.profile !== null ? state.auth.profile.email : "notLogged")
 
     useEffect(()=>{
         if (!isLoggedIn){
@@ -37,10 +35,7 @@ export const Profile = () => {
         navigate(PATH.LOGIN);
     }
 
-    const getPacksHandler = () => {
-        dispatch(packsThunks.getPacks({}))
-        console.log(packs)
-    }
+
 
     return (
         <div className={s.container}>
