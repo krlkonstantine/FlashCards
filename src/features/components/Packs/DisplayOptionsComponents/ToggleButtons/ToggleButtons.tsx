@@ -19,7 +19,7 @@ export default function ColorToggleButton() {
         alert(myUserId)
         dispatch(packsActions.setFilterByAuthor(newAlignment === "my"
             ? {user_id: myUserId}
-            : "")
+            : {user_id: ""})
         )
     }
 

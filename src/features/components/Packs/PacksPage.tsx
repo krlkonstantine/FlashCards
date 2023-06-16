@@ -17,7 +17,7 @@ export const PacksPage = () => {
     const filterQueryParams = useAppSelector((state)=> state.packs.queryParams)
 
     useEffect(() => {
-        dispatch(packsThunks.getPacks({}));
+        dispatch(packsThunks.getPacks(filterQueryParams));
     }, [filterQueryParams]);
 
     const addPackArgs = {
