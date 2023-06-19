@@ -10,13 +10,12 @@ import {Cards} from "features/components/Cards/Cards";
 import {Learn} from "features/components/Learn/Learn";
 import {SetNewPass} from "features/components/SetNewPass/SetNewPass";
 import {Error} from "features/components/Error/Error";
-import {NavLink} from 'react-router-dom'
-import s from "./Pages.module.css"
 import {Counter} from "features/counter/Counter";
 import {Header} from "features/components/Header/Header";
 import {EmptyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/EmptyPack";
 import {MyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/MyPack";
 import {FriendsPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/FriendsPack/FriendsPack";
+import {PrivateRoutes} from "app/hoc/PrivateRoutes";
 
 export const PATH = {
     REGISTER: '/register',
@@ -39,15 +38,16 @@ export const Pages = () => {
 
     return (
         <HashRouter>
-            <div>
-                <Header/>
-                <Routes>
-                    *<Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
-                    <Route path={PATH.LOGIN} element={<Login/>}/>
+            <Header/>
+            <Routes>
+                <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
+                <Route path={PATH.LOGIN} element={<Login/>}/>
+                <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
+                <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
+                <Route path={PATH.REGISTER} element={<Register/>}/>
+                <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
+                <Route element={ <PrivateRoutes />}>
                     <Route path={PATH.PROFILE} element={<Profile/>}/>
-                    <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
-                    <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
-                    <Route path={PATH.REGISTER} element={<Register/>}/>
                     <Route path={PATH.PACKS} element={<PacksPage/>}/>
                     <Route path={PATH.CARDS} element={<Cards/>}/>
                     <Route path={PATH.LEARN} element={<Learn/>}/>
@@ -55,29 +55,10 @@ export const Pages = () => {
                     <Route path={PATH.EMPTY_PACK} element={<EmptyPack/>}/>
                     <Route path={PATH.MY_PACK} element={<MyPack/>}/>
                     <Route path={PATH.FRIENDS_PACK} element={<FriendsPack/>}/>
-                    <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
-                    {/*<Route path={"/set-new-password/:resetPasswordToken"} element={<SetNewPass/>}/>*/}
-                    <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
-
-                    {/*роут для несуществующей страницы должен отрисовать <Error404 />*/}
-                    <Route path={'/404'} element={<Error/>}/>
-                </Routes>
-                {/*<NavLink className={s.navlinks}
-                         to={PATH.PROFILE}
-                >Profile</NavLink>
-                <NavLink className={s.navlinks}
-                         to={PATH.CARDS}
-                >Cards</NavLink>
-                <NavLink className={s.navlinks}
-                         to={PATH.PACKS}
-                >Packs</NavLink>
-                <NavLink className={s.navlinks}
-                         to={PATH.LOGIN}
-                >Log in</NavLink>
-                <NavLink className={s.navlinks}
-                         to={PATH.REGISTER}
-                >Register</NavLink>*/}
-            </div>
+                </Route>
+                <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
+                <Route path={'/404'} element={<Error/>}/>
+            </Routes>
         </HashRouter>
 
     );

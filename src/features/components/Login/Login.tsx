@@ -14,7 +14,7 @@ import {toast} from "react-toastify";
 
 export const Login = () => {
     const dispatch = useAppDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const {register, control, formState: {errors, isValid}, handleSubmit, reset} = useForm({
         mode: "onSubmit"
