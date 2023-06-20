@@ -10,9 +10,9 @@ import {
 
 export const packsApi = {
 
-    getPacks: (arg: ArgGetPacksType) => {
+    getPacks: (payload: ArgGetPacksType) => {
         return instance.get<GetPacksResponseType>('/cards/pack', {
-            params: arg
+            params: { ...payload } || {}
         })
     },
     addPack: (arg: ArgAddNewPack) => {

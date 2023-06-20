@@ -39,13 +39,13 @@ const slice = createSlice({
 const register = CreateAppAsyncThunk<void, ArgRegisterType>
 ('auth/register',
     async (arg, thunkAPI) => {
-    //создали санку, теперь подключаем ранее соданную апишку
-    //первым параметром передаем санк апи
-    //вторым передаем саму нашу логику норм сценария
-    return thunkTryCatch(thunkAPI, async () => {
-        await authApi.register(arg)
+        //создали санку, теперь подключаем ранее соданную апишку
+        //первым параметром передаем санк апи
+        //вторым передаем саму нашу логику норм сценария
+        return thunkTryCatch(thunkAPI, async () => {
+            await authApi.register(arg)
+        })
     })
-})
 
 const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login',
     async (arg, thunkAPI) => {
@@ -54,7 +54,18 @@ const login = CreateAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
         return thunkTryCatch(thunkAPI, async () => {
                 console.log(arg)
                 const res = await authApi.login(arg)
-                const profileData = res.data
+                return {profile: res.data}
+            },
+            false
+        )
+    })
+
+const me = CreateAppAsyncThunk<{ profile: ProfileType }, {}>('auth/me',
+    async (arg, thunkAPI) => {
+
+        return thunkTryCatch(thunkAPI, async () => {
+                console.log(arg)
+                const res = await authApi.me(arg)
                 return {profile: res.data}
             },
             false
@@ -85,4 +96,4 @@ const setNewPass = CreateAppAsyncThunk<void, any>('auth/createNewPass',
 
 export const authReducer = slice.reducer
 //export const authActions = slice.actions
-export const authThunks = {register, login, forgotPass, setNewPass, logOut, changeUserName}
+export const authThunks = {register, login, me, forgotPass, setNewPass, logOut, changeUserName}

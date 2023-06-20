@@ -15,6 +15,7 @@ export default function ColorToggleButton() {
         event: React.MouseEvent<HTMLElement>,
         newAlignment: "my" | "all",
     ) => {
+        console.log(event)
         setAlignment(newAlignment);
         alert(myUserId)
         dispatch(packsActions.setFilterByAuthor(newAlignment === "my"
@@ -25,7 +26,6 @@ export default function ColorToggleButton() {
 
     return (
         <ToggleButtonGroup
-            sx={{ToggleButtonGroupPropsColorOverrides: "red"}}
             className={s.toggleButtons}
             color='primary'
             value={alignment}

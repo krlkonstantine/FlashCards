@@ -16,6 +16,9 @@ export const authApi = {
 	login: (arg:ArgLoginType) => {
 		return instance.post<any>('auth/login',arg)
 	},
+	me: (arg: {}) => {
+		return instance.post<any>('auth/login',arg)
+	},
     forgotPass: (arg:ArgForgotPass) => {
 		// TODO
 		return instance.post<any>('auth/forgot',arg)

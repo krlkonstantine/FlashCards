@@ -1,5 +1,5 @@
-import React from 'react';
-import {HashRouter, Navigate, Route, Routes, useParams} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {HashRouter, Navigate, Route, Routes, useNavigate, BrowserRouter} from "react-router-dom";
 import {Login} from "features/components/Login/Login";
 import {Profile} from "features/components/Profile/Profile";
 import {ForgotPass} from "features/components/ForgotPass/ForgotPass";
@@ -16,6 +16,9 @@ import {EmptyPack} from "features/components/Packs/DisplayOptionsComponents/Pack
 import {MyPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/MyPack";
 import {FriendsPack} from "features/components/Packs/DisplayOptionsComponents/PackPages/FriendsPack/FriendsPack";
 import {PrivateRoutes} from "app/hoc/PrivateRoutes";
+import {useAppDispatch} from "common/hooks";
+import {authThunks} from "features/auth/auth.slice";
+import {appActions} from "app/app.slice";
 
 export const PATH = {
     REGISTER: '/register',
@@ -35,32 +38,50 @@ export const PATH = {
 }
 
 export const Pages = () => {
+    const dispatch = useAppDispatch()
+/*
+    const navigate = useNavigate()
+*/
+
+
+    useEffect(() => {
+        dispatch(authThunks.me({}))
+            /*.unwrap()
+            .then(() => {
+                navigate("/packs");
+            })
+            .catch(() => {
+                navigate("/login");
+            })*/
+        /*.finally(()=>{
+            dispatch(appActions.setIsAppInitialized({ isAppInitialized: true }));
+        })*/
+    }, [])
 
     return (
-        <HashRouter>
-            <Header/>
-            <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
-                <Route path={PATH.LOGIN} element={<Login/>}/>
-                <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
-                <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
-                <Route path={PATH.REGISTER} element={<Register/>}/>
-                <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
-                <Route element={ <PrivateRoutes />}>
-                    <Route path={PATH.PROFILE} element={<Profile/>}/>
-                    <Route path={PATH.PACKS} element={<PacksPage/>}/>
-                    <Route path={PATH.CARDS} element={<Cards/>}/>
-                    <Route path={PATH.LEARN} element={<Learn/>}/>
-                    <Route path={PATH.COUNTER} element={<Counter/>}/>
-                    <Route path={PATH.EMPTY_PACK} element={<EmptyPack/>}/>
-                    <Route path={PATH.MY_PACK} element={<MyPack/>}/>
-                    <Route path={PATH.FRIENDS_PACK} element={<FriendsPack/>}/>
-                </Route>
-                <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
-                <Route path={'/404'} element={<Error/>}/>
-            </Routes>
-        </HashRouter>
-
+            <HashRouter>
+                <Header/>
+                <Routes>
+                    <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
+                    <Route path={PATH.LOGIN} element={<Login/>}/>
+                    <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
+                    <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
+                    <Route path={PATH.REGISTER} element={<Register/>}/>
+                    <Route path={PATH.SET_NEW_PASS} element={<SetNewPass/>}/>
+                    <Route element={<PrivateRoutes/>}>
+                        <Route path={PATH.PROFILE} element={<Profile/>}/>
+                        <Route path={PATH.PACKS} element={<PacksPage/>}/>
+                        <Route path={PATH.CARDS} element={<Cards/>}/>
+                        <Route path={PATH.LEARN} element={<Learn/>}/>
+                        <Route path={PATH.COUNTER} element={<Counter/>}/>
+                        <Route path={PATH.EMPTY_PACK} element={<EmptyPack/>}/>
+                        <Route path={PATH.MY_PACK} element={<MyPack/>}/>
+                        <Route path={PATH.FRIENDS_PACK} element={<FriendsPack/>}/>
+                    </Route>
+                    <Route path={'/*'} element={<Navigate to={PATH.ERROR}/>}/>
+                    <Route path={'/404'} element={<Error/>}/>
+                </Routes>
+            </HashRouter>
     );
 };
 

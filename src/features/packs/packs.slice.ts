@@ -26,21 +26,40 @@ const slice = createSlice({
         },
     },
     reducers: {
-        setFilterByAuthor: (state,action) => {
+        setSearchByname: (state,action) => {
+            debugger
+                state.queryParams.packName = action.payload.packName
+        },setFilterByAuthor: (state,action) => {
             debugger
                 state.queryParams.user_id = action.payload.user_id
+        },
+        setMinAndMaxCardsCount: (state,action) => {
+            debugger
+                state.queryParams.min = action.payload.min
+                state.queryParams.max = action.payload.max
+        },setMinCardsCount: (state,action) => {
+            debugger
+                state.queryParams.min = action.payload.min
+        },
+        setMaxCardsCount: (state,action) => {
+            debugger
+                state.queryParams.max = action.payload.max
         }
     },
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
-            .addCase(getPacks.fulfilled, (state, action: PayloadAction<{ response: GetPacksResponseType }>) => {
+            .addCase(getPacks.fulfilled, (state, action) => {
                 const packs = action.payload.response
                 state.packs = packs.cardPacks
+                state.page = packs.page
+                state.pageCount = packs.pageCount
+                state.minCardsCount = packs.minCardsCount
+                state.maxCardsCount = packs.maxCardsCount
+                state.cardPacksTotalCount = packs.cardPacksTotalCount
                 alert("GOT THE PACKS!")
                 console.log(state)
             })
             .addCase(addNewPack.fulfilled, (state, action: PayloadAction<{ response: any }>) => {
-
             })
     }
 })
