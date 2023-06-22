@@ -15,13 +15,14 @@ export const PacksPage = () => {
     const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
     const filterQueryParams = useAppSelector((state)=> state.packs.queryParams)
+    const userId = useAppSelector((state)=>state.auth.profile?._id)
 
     useEffect(() => {
         dispatch(packsThunks.getPacks(filterQueryParams));
-    }, [filterQueryParams]);
-
+    }, [filterQueryParams.packName, filterQueryParams.min,filterQueryParams.max,filterQueryParams.user_id]);
+//прописать аждую отдельно
     const addPackArgs = {
-        name: "WOW! That's a brand new pak"
+        name: "WOW! That's a brand new pack"
     }
 
     const addNewPackHandler = () => {

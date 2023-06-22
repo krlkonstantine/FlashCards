@@ -17,7 +17,7 @@ export const authApi = {
 		return instance.post<any>('auth/login',arg)
 	},
 	me: (arg: {}) => {
-		return instance.post<any>('auth/login',arg)
+		return instance.post<any>('auth/me',arg)
 	},
     forgotPass: (arg:ArgForgotPass) => {
 		// TODO

@@ -9,8 +9,9 @@ export function useDebounce<T>(value:T,timerValue?:number):T{
             setDebouncedValue(value)
         },timerValue || 700)
 
-        clearTimeout(timer)
-
+       return ( ) => {
+           clearTimeout(timer)
+       }
     },[value,timerValue])
 
     return debouncedValue

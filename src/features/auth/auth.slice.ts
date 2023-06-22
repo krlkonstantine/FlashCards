@@ -22,6 +22,10 @@ const slice = createSlice({
                 state.isLoggedIn = true;
 
             })
+            .addCase(me.fulfilled, (state, action) => {
+                state.profile = action.payload.profile;
+                state.isLoggedIn = true;
+            })
             .addCase(logOut.fulfilled, (state, action) => {
                 state.isLoggedIn = false;
                 state.profile = null;
@@ -64,6 +68,7 @@ const me = CreateAppAsyncThunk<{ profile: ProfileType }, {}>('auth/me',
     async (arg, thunkAPI) => {
 
         return thunkTryCatch(thunkAPI, async () => {
+
                 console.log(arg)
                 const res = await authApi.me(arg)
                 return {profile: res.data}

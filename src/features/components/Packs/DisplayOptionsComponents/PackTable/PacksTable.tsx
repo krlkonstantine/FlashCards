@@ -349,17 +349,24 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {useAppSelector} from "common/hooks";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 import {PackOptions} from "features/components/Packs/DisplayOptionsComponents/PackOptions/PackOptions";
+import {EditableSpan} from "common/components/EditableSpan/EditableSpan";
+import {packsThunks} from "features/packs/packs.slice";
 
 
 export function PacksTable() {
     const packs = useAppSelector((state) => state.packs.packs)
     const userId = useAppSelector((state) => state.auth.profile?._id)
-
+    const dispatch = useAppDispatch()
     const deleteCardHandler = () => {
 
     }
+
+    const onPackTitleDoubleClickHandler = (packId: string, newValue: string) => {
+        dispatch(packsThunks.changePack({_id: packId, name: newValue}))
+    }
+
     return (
         <TableContainer component={Paper}>
             {packs && packs.length > 0 && (
@@ -380,12 +387,17 @@ export function PacksTable() {
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {pack.name}
+                                    {userId === pack.user_id
+                                        ? <EditableSpan value={pack.name}
+                                                        onChange={(newValue) => onPackTitleDoubleClickHandler(pack._id, newValue)}/>
+                                        : pack.name}
                                 </TableCell>
                                 <TableCell align="right">{pack.cardsCount}</TableCell>
                                 <TableCell align="right">{pack.updated}</TableCell>
                                 <TableCell align="right">{pack.user_name}</TableCell>
-                                <TableCell align="right"><PackOptions isAuthor={userId === pack.user_id}/></TableCell>
+                                <TableCell align="right">
+                                    <PackOptions packId={pack._id} isAuthor={userId === pack.user_id}/>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

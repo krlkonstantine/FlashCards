@@ -5,6 +5,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 type EditableSpanPropsType = {
     value: string
     onChange: (newValue: string) => void
+    _id?:string
 }
 
 export const EditableSpan = React.memo(function (props: EditableSpanPropsType) {

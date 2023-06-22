@@ -37,6 +37,10 @@ export function InputSlider() {
         }
     };
 
+    useEffect(() => {
+        debugger
+        setMinAndMaxValues([minCardsCount,maxCardsCount])
+    },[maxCardsCount])
 
     const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setMinAndMaxValues([Number(event.target.value),minAndMaxValues[1]]);
@@ -54,13 +58,14 @@ export function InputSlider() {
     };
 
     useEffect(()=>{
+        debugger
         dispatch(packsActions.setMinAndMaxCardsCount({
         min:minAndMaxValues[0],
         max:minAndMaxValues[1]
         }))
-        dispatch(packsActions.setMinCardsCount({
+        /*dispatch(packsActions.setMinCardsCount({
             min:minAndMaxValues[0]
-        }))
+        }))*/
     },[debouncedMinAndMax])
 
     /* const handleChange = (event: Event, newValue: number | number[]) => {
@@ -104,6 +109,7 @@ export function InputSlider() {
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         aria-labelledby="input-range-slider"
+                        max={maxCardsCount}
 
                     />
                 </Grid>

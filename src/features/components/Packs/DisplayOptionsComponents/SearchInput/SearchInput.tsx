@@ -18,10 +18,13 @@ export default function CustomizedInputBase() {
     const onInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setSearchValue(event.currentTarget.value)
     }
+    console.log(searchValue)
+    console.log(debouncedValue)
 
     useEffect(()=>{
+
         dispatch(packsActions.setSearchByName({packName: searchValue}))
-        alert(`sent this value: ${searchValue}`)
+
     },[debouncedValue])
 
     return (

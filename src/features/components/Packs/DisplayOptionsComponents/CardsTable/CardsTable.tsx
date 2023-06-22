@@ -306,7 +306,7 @@ export function CardsTable(props:CardstableType) {
                                         <TableCell align="right">
                                             <Rating name="read-only" defaultValue={0} value={row.grade as number} readOnly/>
                                         </TableCell>
-                                        {props.actions && <TableCell align="right"><PackOptions isAuthor={true}/></TableCell>}
+                                        {props.actions && <TableCell align="right"><PackOptions packId={row.question} isAuthor={true}/></TableCell>}
                                     </TableRow>
                                 );
                             })}
