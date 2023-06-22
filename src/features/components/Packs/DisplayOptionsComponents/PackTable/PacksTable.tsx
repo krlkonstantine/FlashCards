@@ -349,22 +349,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useAppSelector} from "common/hooks";
+import {useAppSelector} from "common/hooks";
+import {PackOptions} from "features/components/Packs/DisplayOptionsComponents/PackOptions/PackOptions";
 
 
-export  function PacksTable() {
+export function PacksTable() {
     const packs = useAppSelector((state) => state.packs.packs)
+    const userId = useAppSelector((state) => state.auth.profile?._id)
 
+    const deleteCardHandler = () => {
+
+    }
     return (
         <TableContainer component={Paper}>
             {packs && packs.length > 0 && (
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Name </TableCell>
                             <TableCell align="right">Cards</TableCell>
-                            <TableCell align="right">Created by</TableCell>
                             <TableCell align="right">Updated</TableCell>
+                            <TableCell align="right">Created by</TableCell>
                             <TableCell align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
@@ -372,7 +377,7 @@ export  function PacksTable() {
                         {packs.map((pack) => (
                             <TableRow
                                 key={pack.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
                                     {pack.name}
@@ -380,7 +385,7 @@ export  function PacksTable() {
                                 <TableCell align="right">{pack.cardsCount}</TableCell>
                                 <TableCell align="right">{pack.updated}</TableCell>
                                 <TableCell align="right">{pack.user_name}</TableCell>
-                                <TableCell align="right">{pack.actions}</TableCell>
+                                <TableCell align="right"><PackOptions isAuthor={userId === pack.user_id}/></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

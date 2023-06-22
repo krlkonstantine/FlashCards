@@ -19,13 +19,13 @@ export const packsApi = {
             cardsPack: arg
         })
     },
+    changePack: (arg: ArgChangePack) => {
+        return instance.put<ChangePackResponseType>('/cards/pack/', arg)
+    },
     deletePack: (arg: ArgDeletePack) => {
         return instance.delete<DeletePackResponseType>('/cards/pack/', {
             params: arg
         })
-    },
-    changePack: (arg: ArgChangePack) => {
-        return instance.put<ChangePackResponseType>('/cards/pack/', arg)
     },
 
 }

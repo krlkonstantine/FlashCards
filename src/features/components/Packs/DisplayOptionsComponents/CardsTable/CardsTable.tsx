@@ -13,8 +13,8 @@ import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import {visuallyHidden} from '@mui/utils';
-import {Rating} from "@mui/material";
-import {CardActions} from "features/components/Packs/DisplayOptionsComponents/PackPages/MyPack/CardActions/CardActions";
+import {CardActions, Rating} from "@mui/material";
+import {PackOptions} from "features/components/Packs/DisplayOptionsComponents/PackOptions/PackOptions";
 
 interface Data {
     question: string;
@@ -306,7 +306,7 @@ export function CardsTable(props:CardstableType) {
                                         <TableCell align="right">
                                             <Rating name="read-only" defaultValue={0} value={row.grade as number} readOnly/>
                                         </TableCell>
-                                        {props.actions && <TableCell align="right"><CardActions/></TableCell>}
+                                        {props.actions && <TableCell align="right"><PackOptions isAuthor={true}/></TableCell>}
                                     </TableRow>
                                 );
                             })}
