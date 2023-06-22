@@ -73,7 +73,7 @@ export type ChangePackResponseType = {
 }
 //DELETE PACK
 export type ArgDeletePack = {
-    id: any
+    id: string
 }
 
 export type DeletePackResponseType = {

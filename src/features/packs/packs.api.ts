@@ -2,8 +2,7 @@ import {instance} from "common/api/common.api";
 
 import {
     AddNewPackResponseType,
-    ArgAddNewPack, ArgChangePack,
-    ArgDeletePack, ArgGetPacksType, ChangePackResponseType, DeletePackResponseType,
+    ArgAddNewPack, ArgChangePack, ArgDeletePack, ArgGetPacksType, ChangePackResponseType, DeletePackResponseType,
     GetPacksResponseType
 } from "features/packs/packs.apiTypes";
 
@@ -20,9 +19,9 @@ export const packsApi = {
             cardsPack: arg
         })
     },
-    deletePack: (id: string) => {
+    deletePack: (arg: ArgDeletePack) => {
         return instance.delete<DeletePackResponseType>('/cards/pack/', {
-            params: {id}
+            params: arg
         })
     },
     changePack: (arg: ArgChangePack) => {

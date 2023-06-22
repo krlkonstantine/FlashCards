@@ -1,7 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import {CreateAppAsyncThunk, thunkTryCatch} from "common/utils";
-import {GetPacksResponseType, CardPacksType, ArgGetPacksType, ArgAddNewPack} from "../packs/packs.apiTypes";
+import {
+    GetPacksResponseType,
+    CardPacksType,
+    ArgGetPacksType,
+    ArgAddNewPack,
+    ArgDeletePack, DeletePackResponseType, ChangePackResponseType, ArgChangePack
+} from "../packs/packs.apiTypes";
 import {packsApi} from "features/packs/packs.api";
 
 const slice = createSlice({
@@ -26,7 +32,7 @@ const slice = createSlice({
         },
     },
     reducers: {
-        setSearchByname: (state,action) => {
+        setSearchByName: (state,action) => {
             debugger
                 state.queryParams.packName = action.payload.packName
         },setFilterByAuthor: (state,action) => {
@@ -86,7 +92,29 @@ const addNewPack = CreateAppAsyncThunk<{ response: any }, ArgAddNewPack>
         })
     })
 
+const deletePack = CreateAppAsyncThunk<{ response: DeletePackResponseType }, ArgDeletePack>
+('packs/deletePack',
+    async (payload: ArgDeletePack, thunkAPI) => {
+        return thunkTryCatch(thunkAPI, async () => {
+            const {dispatch} = thunkAPI
+            const res = await packsApi.deletePack(payload)
+            dispatch(getPacks(thunkAPI.getState().packs.queryParams))
+            return {response: res.data}
+        })
+    })
+
+const changePack = CreateAppAsyncThunk<{response: ChangePackResponseType}, any>(
+    'packs/deletePack',
+    async (arg, thunkAPI)=>{
+        return thunkTryCatch(thunkAPI, async ()=>{
+            const {dispatch} = thunkAPI
+            const res = await packsApi.changePack(arg)
+            dispatch(getPacks(thunkAPI.getState().packs.queryParams))
+            return {response: res.data}
+        })
+    }
+)
 
 export const packsReducer = slice.reducer
 export const packsActions = slice.actions
-export const packsThunks = {getPacks, addNewPack}
+export const packsThunks = {getPacks, addNewPack, changePack, deletePack}

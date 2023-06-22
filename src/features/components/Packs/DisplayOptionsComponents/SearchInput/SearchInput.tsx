@@ -5,19 +5,24 @@ import s from "features/components/Packs/DisplayOptionsComponents/SearchInput/Se
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import {useAppDispatch, useAppSelector} from "common/hooks";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {packsActions} from "features/packs/packs.slice";
+import {useDebounce} from "common/hooks/Debounce";
 
 
 export default function CustomizedInputBase() {
     const dispatch = useAppDispatch()
-    const packName = useAppSelector((state) => state.packs.queryParams.packName)
     const [searchValue, setSearchValue] = useState<string>("")
+    const debouncedValue = useDebounce<string>(searchValue,700)
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setSearchValue(event.currentTarget.value)
-        dispatch(packsActions.setFilterByAuthor(searchValue))
     }
+
+    useEffect(()=>{
+        dispatch(packsActions.setSearchByName({packName: searchValue}))
+        alert(`sent this value: ${searchValue}`)
+    },[debouncedValue])
 
     return (
         <Paper className={s.inputBase}
@@ -31,7 +36,7 @@ export default function CustomizedInputBase() {
                 sx={{ml: 0, flex: 1, height: 80}}
                 placeholder="Search packs"
                 inputProps={{'aria-label': 'Search packs'}}
-                value={packName}
+                value={searchValue}
                 onChange={onInputChange}
             />
         </Paper>
