@@ -360,9 +360,6 @@ export function PacksTable() {
     const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
     const userId = useAppSelector((state) => state.auth.profile?._id)
-    const deleteCardHandler = () => {
-
-    }
 
     const onPackTitleDoubleClickHandler = (packId: string, newValue: string) => {
         dispatch(packsThunks.changePack({_id: packId, name: newValue}))

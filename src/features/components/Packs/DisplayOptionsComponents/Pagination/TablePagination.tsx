@@ -6,8 +6,6 @@ import {packsActions} from "features/packs/packs.slice";
 
 export const TablePaginations = () => {
     const dispatch = useAppDispatch()
-    const packs = useAppSelector((state) => state.packs)
-    const page = useAppSelector((state) => state.packs?.page)
     const packsPerPageCount = useAppSelector((state) => state.packs.pageCount)
     const packsTotalCount = useAppSelector((state) => state.packs.cardPacksTotalCount)
     const [packsPerPage, setPacksPerPage] = useState<string>("4")

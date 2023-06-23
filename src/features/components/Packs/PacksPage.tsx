@@ -30,7 +30,6 @@ export const PacksPage = () => {
         filterQueryParams.pageCount,
     ]);
 
-//прописать аждую отдельно
     const addPackArgs = {
         name: "WOW! That's a brand new pack"
     }
@@ -39,10 +38,6 @@ export const PacksPage = () => {
         dispatch(packsThunks.addNewPack(addPackArgs))
     }
 
-    /*useEffect(()=>{
-        dispatch(packsThunks.getPacks({}))
-        console.log("tried to get the packs in packs page")
-    },[])*/
 
     return (
         <div className={s.packsContainer}>
