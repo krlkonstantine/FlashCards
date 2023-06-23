@@ -18,7 +18,6 @@ import {FriendsPack} from "features/components/Packs/DisplayOptionsComponents/Pa
 import {PrivateRoutes} from "app/hoc/PrivateRoutes";
 import {useAppDispatch} from "common/hooks";
 import {authThunks} from "features/auth/auth.slice";
-import {appActions} from "app/app.slice";
 
 export const PATH = {
     REGISTER: '/register',
@@ -39,9 +38,7 @@ export const PATH = {
 
 export const Pages = () => {
     const dispatch = useAppDispatch()
-/*
-    const navigate = useNavigate()
-*/
+
 
 
     useEffect(() => {
@@ -62,7 +59,7 @@ export const Pages = () => {
             <HashRouter>
                 <Header/>
                 <Routes>
-                    <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
+                    <Route path={'/'} element={<Navigate to={PATH.PACKS}/>}/>
                     <Route path={PATH.LOGIN} element={<Login/>}/>
                     <Route path={PATH.FORGOT_PASS} element={<ForgotPass/>}/>
                     <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>

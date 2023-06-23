@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {authThunks} from "features/auth/auth.slice";
 import {Controller, useForm} from "react-hook-form";
 import s from "features/components/Login/Login.module.css";
@@ -6,8 +6,7 @@ import {Button, Checkbox, FormControlLabel, Input} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {NavLink, useNavigate} from "react-router-dom";
 import {PATH} from "features/components/Pages/Pages";
-import {useAppDispatch} from "common/hooks";
-import {useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 import {toast} from "react-toastify";
 
 
@@ -15,10 +14,17 @@ import {toast} from "react-toastify";
 export const Login = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
 
     const {register, control, formState: {errors, isValid}, handleSubmit, reset} = useForm({
         mode: "onSubmit"
     })
+
+    useEffect(()=>{
+        if (isLoggedIn) {
+            navigate('/packs')
+        }
+    },[])
 
 
     const onSubmit = (data: any) => {

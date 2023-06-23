@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
 import {packsThunks} from "features/packs/packs.slice";
 import {useAppDispatch, useAppSelector} from "common/hooks";
+import {TablePaginations} from "features/components/Packs/DisplayOptionsComponents/Pagination/TablePagination";
 
 
 export const PacksPage = () => {
@@ -20,7 +21,14 @@ export const PacksPage = () => {
 
     useEffect(() => {
         dispatch(packsThunks.getPacks(filterQueryParams));
-    }, [filterQueryParams.packName, filterQueryParams.min, filterQueryParams.max, filterQueryParams.user_id]);
+    }, [
+        filterQueryParams.packName,
+        filterQueryParams.min,
+        filterQueryParams.max,
+        filterQueryParams.user_id,
+        filterQueryParams.page,
+        filterQueryParams.pageCount,
+    ]);
 
 //прописать аждую отдельно
     const addPackArgs = {
@@ -76,6 +84,9 @@ export const PacksPage = () => {
                             variant="contained" onClick={addNewPackHandler}
                         >Add new pack</Button>
                     </div>}
+            </div>
+            <div>
+                <TablePaginations/>
             </div>
 
         </div>

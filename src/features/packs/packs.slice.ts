@@ -35,7 +35,8 @@ const slice = createSlice({
         setSearchByName: (state,action) => {
             debugger
                 state.queryParams.packName = action.payload.packName
-        },setFilterByAuthor: (state,action) => {
+        },
+        setFilterByAuthor: (state,action) => {
             debugger
                 state.queryParams.user_id = action.payload.user_id
         },
@@ -43,13 +44,14 @@ const slice = createSlice({
             debugger
                 state.queryParams.min = action.payload.min
                 state.queryParams.max = action.payload.max
-        },setMinCardsCount: (state,action) => {
-            debugger
-                state.queryParams.min = action.payload.min
         },
-        setMaxCardsCount: (state,action) => {
+        setPacksPerPageCount: (state,action) => {
             debugger
-                state.queryParams.max = action.payload.max
+                state.queryParams.pageCount = action.payload.pageCount
+        },
+        setPageNumber: (state,action) => {
+            debugger
+                state.queryParams.page = action.payload.page
         }
     },
     extraReducers: (builder) => {
