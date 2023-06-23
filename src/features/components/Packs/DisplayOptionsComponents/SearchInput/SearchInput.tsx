@@ -22,9 +22,7 @@ export default function CustomizedInputBase() {
     console.log(debouncedValue)
 
     useEffect(()=>{
-
         dispatch(packsActions.setSearchByName({packName: searchValue}))
-
     },[debouncedValue])
 
     return (

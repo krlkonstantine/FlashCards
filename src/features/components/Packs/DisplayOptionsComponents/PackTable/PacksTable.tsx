@@ -356,9 +356,10 @@ import {packsThunks} from "features/packs/packs.slice";
 
 
 export function PacksTable() {
+
+    const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
     const userId = useAppSelector((state) => state.auth.profile?._id)
-    const dispatch = useAppDispatch()
     const deleteCardHandler = () => {
 
     }
@@ -396,7 +397,7 @@ export function PacksTable() {
                                 <TableCell align="right">{pack.updated}</TableCell>
                                 <TableCell align="right">{pack.user_name}</TableCell>
                                 <TableCell align="right">
-                                    <PackOptions packId={pack._id} isAuthor={userId === pack.user_id}/>
+                                    <PackOptions hasCards={pack.cardsCount > 0} packId={pack._id} isAuthor={userId === pack.user_id}/>
                                 </TableCell>
                             </TableRow>
                         ))}

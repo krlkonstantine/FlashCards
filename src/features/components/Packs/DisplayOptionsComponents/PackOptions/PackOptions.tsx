@@ -9,6 +9,7 @@ import {packsActions, packsThunks} from "features/packs/packs.slice";
 export type PackOptionsPropsType = {
     isAuthor: boolean
     packId:string
+    hasCards: boolean
 }
 export const PackOptions = (props: PackOptionsPropsType) => {
 
@@ -32,11 +33,11 @@ export const PackOptions = (props: PackOptionsPropsType) => {
         <span className={s.cardActionsContainer}>
             {props.isAuthor
                 ? <>
-                    <SchoolIcon onClick={learnPackHandler} color={toggleBtnColor} fontSize="small"/>
+                    <SchoolIcon  onClick={learnPackHandler} color={props.hasCards ? toggleBtnColor : 'disabled'} fontSize="small"/>
                     <BorderColorIcon onClick={editCardHandler} fontSize="small"/>
                     <DeleteForeverIcon onClick={deleteCardHandler} fontSize="small"/>
                 </>
-                : <SchoolIcon onClick={learnPackHandler} color={toggleBtnColor} fontSize="small"/>}
+                : <SchoolIcon onClick={learnPackHandler} color={props.hasCards ? toggleBtnColor : 'disabled'} fontSize="small"/>}
 
         </span>
     );

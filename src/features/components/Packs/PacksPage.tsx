@@ -14,12 +14,14 @@ import {useAppDispatch, useAppSelector} from "common/hooks";
 export const PacksPage = () => {
     const dispatch = useAppDispatch()
     const packs = useAppSelector((state) => state.packs.packs)
-    const filterQueryParams = useAppSelector((state)=> state.packs.queryParams)
-    const userId = useAppSelector((state)=>state.auth.profile?._id)
+    const userId = useAppSelector((state) => state.auth.profile?._id)
+    const filterQueryParams = useAppSelector((state) => state.packs.queryParams)
+    const packsCount = useAppSelector((state) => state.packs.cardPacksTotalCount)
 
     useEffect(() => {
         dispatch(packsThunks.getPacks(filterQueryParams));
-    }, [filterQueryParams.packName, filterQueryParams.min,filterQueryParams.max,filterQueryParams.user_id]);
+    }, [filterQueryParams.packName, filterQueryParams.min, filterQueryParams.max, filterQueryParams.user_id]);
+
 //прописать аждую отдельно
     const addPackArgs = {
         name: "WOW! That's a brand new pack"
@@ -52,7 +54,7 @@ export const PacksPage = () => {
                 </span>
                 <span className={s.sortOptionContainer}>
                     <span className={s.toggleTitle}>Show card packs</span>
-                    <ToggleButtons />
+                    <ToggleButtons/>
                 </span>
                 <span className={s.sortOptionContainer}>
                     <span className={s.toggleTitle}>Cards per pack</span>
@@ -65,7 +67,15 @@ export const PacksPage = () => {
                 </span>
             </div>
             <div className={s.packsList}>
-                {packs && <PacksTable/>}
+                {packs && packsCount && packsCount > 0
+                    ? <PacksTable/>
+                    : <div>
+                        <h3>No packs with such name found. Please try another name or</h3>
+                        <Button
+                            style={{borderRadius: 20, width: 180, textTransform: "none"}}
+                            variant="contained" onClick={addNewPackHandler}
+                        >Add new pack</Button>
+                    </div>}
             </div>
 
         </div>

@@ -62,7 +62,6 @@ const slice = createSlice({
                 state.minCardsCount = packs.minCardsCount
                 state.maxCardsCount = packs.maxCardsCount
                 state.cardPacksTotalCount = packs.cardPacksTotalCount
-                alert("GOT THE PACKS!")
                 console.log(state)
             })
             .addCase(addNewPack.fulfilled, (state, action: PayloadAction<{ response: any }>) => {
