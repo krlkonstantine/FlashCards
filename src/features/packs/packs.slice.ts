@@ -52,6 +52,10 @@ const slice = createSlice({
         setPageNumber: (state,action) => {
             debugger
                 state.queryParams.page = action.payload.page
+        },
+        setSortByTableRows: (state,action) => {
+            debugger
+                state.queryParams.sortPacks = action.payload.sortPacks
         }
     },
     extraReducers: (builder) => {

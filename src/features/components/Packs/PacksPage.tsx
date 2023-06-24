@@ -6,7 +6,7 @@ import ToggleButtons from 'features/components/Packs/DisplayOptionsComponents/To
 import {InputSlider} from "features/components/Packs/DisplayOptionsComponents/Slider/Slider";
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import IconButton from "@mui/material/IconButton";
-import {PacksTable} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
+import {PacksTable_old} from "features/components/Packs/DisplayOptionsComponents/PackTable/PacksTable";
 import {packsThunks} from "features/packs/packs.slice";
 import {useAppDispatch, useAppSelector} from "common/hooks";
 import {TablePaginations} from "features/components/Packs/DisplayOptionsComponents/Pagination/TablePagination";
@@ -28,6 +28,7 @@ export const PacksPage = () => {
         filterQueryParams.user_id,
         filterQueryParams.page,
         filterQueryParams.pageCount,
+        filterQueryParams.sortPacks,
     ]);
 
     const addPackArgs = {
@@ -71,7 +72,7 @@ export const PacksPage = () => {
             </div>
             <div className={s.packsList}>
                 {packs && packsCount && packsCount > 0
-                    ? <PacksTable/>
+                    ? <PacksTable_old/>
                     : <div>
                         <h3>No packs with such name found. Please try another name or</h3>
                         <Button
